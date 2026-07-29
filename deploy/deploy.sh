@@ -10,7 +10,7 @@ if ! command -v rsync >/dev/null 2>&1; then
 fi
 
 sudo install -d -m 0755 -o www-data -g www-data "$destination"
-sudo rsync -a --delete \
+sudo rsync -a --delete --delete-excluded \
   --exclude '.git/' \
   --exclude '.venv/' \
   --exclude '__pycache__/' \
