@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Edit Hazard Family Reunion</title>
+<style>
+:root{--ink:#1f2937;--muted:#667085;--paper:#fff;--line:#d0d8d4;--accent:#225a4d;--soft:#edf3f0;--danger:#a12828}
+*{box-sizing:border-box}html,body{height:100%;margin:0}body{font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:#e8eeeb;display:flex;flex-direction:column}
+.toolbar{display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding:10px 12px;background:var(--paper);border-bottom:1px solid var(--line);box-shadow:0 2px 8px #17251f18;z-index:3}
+.toolbar strong{margin-right:4px}.toolbar .spacer{flex:1}.button{border:1px solid var(--line);border-radius:7px;background:#fff;padding:7px 10px;font:inherit;font-weight:650;cursor:pointer}.button:hover{background:var(--soft)}.button.primary{background:var(--accent);color:white;border-color:var(--accent)}.button.danger{color:var(--danger)}.button:disabled{opacity:.45;cursor:not-allowed}
+.statusbar{padding:7px 12px;background:#f8faf9;border-bottom:1px solid var(--line);color:var(--muted);font-size:.9rem;display:flex;gap:12px;align-items:center}.statusbar .status{font-weight:650;color:var(--accent)}
+.workspace{min-height:0;flex:1;padding:12px}iframe{display:block;width:100%;height:100%;border:1px solid var(--line);border-radius:10px;background:#fff;box-shadow:0 8px 30px #17251f1f}
+.note{width:min(320px,45vw);padding:7px 9px;border:1px solid var(--line);border-radius:7px;font:inherit}
+@media(max-width:760px){.toolbar{gap:5px}.button{padding:7px 8px}.note{order:10;width:100%}.workspace{padding:6px}}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <strong>Visual editor</strong>
+  <a class="button" href="{{ url_prefix }}/">View site</a>
+  <a class="button" href="{{ url_prefix }}/admin">Admin chat</a>
+  <button class="button" id="addSection">+ Section</button>
+  <button class="button" id="addItem">+ Event</button>
+  <button class="button" id="moveUp">↑</button>
+  <button class="button" id="moveDown">↓</button>
+  <button class="button" id="bold"><b>B</b></button>
+  <button class="button" id="italic"><i>I</i></button>
+  <button class="button" id="link">Link</button>
+  <button class="button danger" id="remove">Delete</button>
+  <span class="spacer"></span>
+  <input class="note" id="publishNote" placeholder="Optional change note">
+  <button class="button" id="reload">Reload</button>
+  <button class="button primary" id="publish">Save &amp; publish</button>
+</div>
+<div class="statusbar"><span>Signed in as <strong>{{ actor }}</strong></span><span class="status" id="status">Loading page…</span><span id="selection">Nothing selected</span></div>
+<div class="workspace"><iframe id="preview" src="{{ url_prefix }}/?edit-preview=1" title="Editable reunion page"></iframe></div>
+<script>
+const PREFIX={{ url_prefix|tojson }};
+const CSRF={{ csrf_token|tojson }};
+const frame=document.getElementById('preview');
+const statusEl=document.getElementById('status');
+const selectionEl=document.getElementById('selection');
+let revision='';
+let selected=null;
+let busy=false;
+
+function setStatus(text,error=false){statusEl.textContent=text;statusEl.style.color=error?'#a12828':'#225a4d'}
+function doc(){return frame.contentDocument}
+function isLocked(el){return Boolean(el && (el.id==='rsvp'||el.closest('#rsvp')||el.matches('header,footer')||el.closest('header,footer')))}
+function describe(el){if(!el)return 'Nothing selected';if(el.classList.contains('item'))return 'Event: '+(el.querySelector('strong')?.textContent.trim()||'untitled');if(el.classList.contains('day'))return 'Section: '+(el.querySelector('h2')?.textContent.trim()||'untitled');return el.tagName.toLowerCase()}
+function selectBlock(el){
+  const d=doc();
+  d.querySelectorAll('.reunion-editor-selected').forEach(node=>node.classList.remove('reunion-editor-selected'));
+  selected=el;
+  if(selected)selected.classList.add('reunion-editor-selected');
+  selectionEl.textContent=describe(selected)+(isLocked(selected)?' (protected)':'');
+}
+function addEditorStyles(d){
+ const style=d.createElement('style');style.id='reunion-editor-style';style.textContent=`
+ [contenteditable="true"]{outline:1px dashed transparent;border-radius:4px;transition:outline-color .12s,background .12s}
+ [contenteditable="true"]:hover{outline-color:#7fa89c;background:#f4faf7}
+ [contenteditable="true"]:focus{outline:2px solid #2a7a65;background:#fff}
+ .reunion-editor-selected{outline:3px solid #d38b21!important;outline-offset:3px}
+ #rsvp{position:relative}.reunion-editor-locked{opacity:.98}.reunion-editor-locked:before{content:"Managed RSVP section";display:inline-block;background:#5f6b66;color:#fff;font-size:11px;padding:2px 6px;border-radius:5px;margin-bottom:6px}
+ `;d.head.appendChild(style);
+}
+function enableEditing(){
+ const d=doc();if(!d)return;
+ addEditorStyles(d);
+ d.getElementById('rsvp')?.classList.add('reunion-editor-locked');
+ const selectors=['header h1','header .subtitle','header .updated','.notice','.day:not(#rsvp) h2','.day:not(#rsvp) .date','.day:not(#rsvp) .item .time','.day:not(#rsvp) .item > div:nth-child(2)','.day:not(#rsvp) .transcription'];
+ d.querySelectorAll(selectors.join(',')).forEach(el=>{el.contentEditable='true';el.spellcheck=true});
+ d.addEventListener('click',event=>{
+   const target=event.target;
+   const block=target.closest('.item,.day,.notice,header,footer');
+   if(block)selectBlock(block);
+ },true);
+ d.addEventListener('input',()=>setStatus('Unsaved changes'));
+ setStatus('Ready. Click text to edit it.');
+}
+async function loadRevision(){
+ const response=await fetch(PREFIX+'/api/document',{credentials:'same-origin'});
+ if(!response.ok)throw new Error((await response.json()).error||'Could not load document');
+ const data=await response.json();revision=data.revision;
+}
+frame.addEventListener('load',async()=>{try{await loadRevision();enableEditing()}catch(error){setStatus(error.message,true)}});
+
+function selectedDay(){return selected?.classList.contains('day')?selected:selected?.closest('.day')}
+function uniqueId(prefix){return prefix+'-'+Date.now().toString(36)}
+function addSection(){
+ const d=doc();const section=d.createElement('section');section.className='day';section.id=uniqueId('section');
+ section.innerHTML='<div class="dayhead"><h2 contenteditable="true">New section</h2><span class="date" contenteditable="true">Date or subtitle</span></div><div class="item"><div class="time" contenteditable="true">Time</div><div contenteditable="true"><strong>New event</strong><div class="details">Add details here.</div></div></div>';
+ const footer=d.querySelector('footer.sources');if(footer)footer.before(section);else d.querySelector('main').appendChild(section);selectBlock(section);setStatus('New section added — publish when ready.');section.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function addItem(){
+ const day=selectedDay();if(!day||isLocked(day)){setStatus('Select an itinerary section first.',true);return}
+ const d=doc();const item=d.createElement('div');item.className='item';item.innerHTML='<div class="time" contenteditable="true">Time</div><div contenteditable="true"><strong>New event</strong><div class="details">Add details here.</div></div>';
+ day.appendChild(item);selectBlock(item);setStatus('New event added — publish when ready.');item.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function removeSelected(){if(!selected||isLocked(selected)){setStatus('That block is protected.',true);return}if(!confirm('Delete the selected '+(selected.classList.contains('day')?'section':'event')+'?'))return;const next=selected.parentElement;selected.remove();selectBlock(next?.closest('.day')||null);setStatus('Block deleted — publish when ready.')}
+function move(direction){if(!selected||isLocked(selected)){setStatus('Select an editable section or event first.',true);return}const sibling=direction<0?selected.previousElementSibling:selected.nextElementSibling;if(!sibling)return;if(direction<0)selected.parentElement.insertBefore(selected,sibling);else selected.parentElement.insertBefore(sibling,selected);selected.scrollIntoView({behavior:'smooth',block:'center'});setStatus('Block moved — publish when ready.')}
+function command(name,value=null){const d=doc();d.execCommand(name,false,value);frame.contentWindow.focus();setStatus('Formatting changed — publish when ready.')}
+function cleanClone(){
+ const main=doc().querySelector('main').cloneNode(true);
+ main.querySelectorAll('[contenteditable]').forEach(el=>el.removeAttribute('contenteditable'));
+ main.querySelectorAll('[spellcheck]').forEach(el=>el.removeAttribute('spellcheck'));
+ main.querySelectorAll('#reunion-editor-style').forEach(el=>el.remove());
+ main.querySelectorAll('.reunion-editor-selected,.reunion-editor-locked').forEach(el=>el.classList.remove('reunion-editor-selected','reunion-editor-locked'));
+ return main.innerHTML;
+}
+async function publish(){
+ if(busy)return;busy=true;document.getElementById('publish').disabled=true;setStatus('Publishing…');
+ try{
+  const response=await fetch(PREFIX+'/api/document',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json','X-CSRF-Token':CSRF},body:JSON.stringify({html:cleanClone(),revision,note:document.getElementById('publishNote').value})});
+  const data=await response.json();if(!response.ok)throw new Error(data.error+(data.details?' — '+data.details:''));
+  revision=data.revision||revision;setStatus(data.unchanged?'No changes to publish.':'Published successfully.');document.getElementById('publishNote').value='';
+  if(!data.unchanged){selected=null;frame.src=PREFIX+'/?edit-preview=1&t='+Date.now()}
+ }catch(error){setStatus(error.message,true)}finally{busy=false;document.getElementById('publish').disabled=false}
+}
+
+document.getElementById('addSection').onclick=addSection;
+document.getElementById('addItem').onclick=addItem;
+document.getElementById('remove').onclick=removeSelected;
+document.getElementById('moveUp').onclick=()=>move(-1);
+document.getElementById('moveDown').onclick=()=>move(1);
+document.getElementById('bold').onclick=()=>command('bold');
+document.getElementById('italic').onclick=()=>command('italic');
+document.getElementById('link').onclick=()=>{const url=prompt('Link URL');if(url)command('createLink',url)};
+document.getElementById('reload').onclick=()=>{if(confirm('Discard unsaved changes and reload?'))frame.src=PREFIX+'/?edit-preview=1&t='+Date.now()};
+document.getElementById('publish').onclick=publish;
+window.addEventListener('beforeunload',event=>{if(statusEl.textContent==='Unsaved changes'){event.preventDefault();event.returnValue=''}});
+</script>
+</body>
+</html>
