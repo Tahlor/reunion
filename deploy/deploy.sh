@@ -13,8 +13,17 @@ sudo install -d -m 0755 -o www-data -g www-data "$destination"
 sudo rsync -a --delete \
   --exclude '.git/' \
   --exclude '.venv/' \
+  --exclude '__pycache__/' \
   --exclude 'server/' \
   --exclude 'deploy/' \
+  --exclude 'docs/' \
+  --exclude 'backups/' \
+  --exclude 'codex/' \
+  --exclude 'codex_runner.sh' \
+  --exclude '*.env' \
+  --exclude '*.sqlite*' \
+  --exclude 'audit.jsonl' \
+  --exclude '.gitignore' \
   --exclude 'README.md' \
   --exclude 'AGENTS.md' \
   "$repo_root/" "$destination/"
