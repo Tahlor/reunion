@@ -63,6 +63,8 @@ The editor:
 
 The service must run as a user that can write to the repository checkout, push `Tahlor/reunion`, and run `deploy/deploy.sh`. Do not grant the Nginx worker account Git credentials.
 
+The organizer can review submitted meal counts from the SSO-protected Admin chat page. After running the Apps Script, put the private response-spreadsheet URL in `REUNION_RSVP_RESULTS_URL` in the host-only `reunion.env`; the admin page will show `Review RSVP results` without publishing that link or any response data to the public site.
+
 ### Codex runner contract
 
 `REUNION_CODEX_RUNNER` must point to a fixed executable that:

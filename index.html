@@ -76,7 +76,7 @@ details{margin-top:14px} summary{cursor:pointer;font-weight:750;color:#24483f}
   <div class="updated">Updated July 29, 2026</div>
 </header>
 
-<div class="notice"><strong>Still to confirm:</strong> exact campsite site numbers; Saturday’s South Fork Park meeting time; the vehicle shuttle assignments for Monday’s self-guided Provo River float; Timpanogos Cave ticket times; and the final shared Google Form link. The campground, church, river put-in and take-out, Heber pickleball park, South Weber rodeo, Tuesday lunch park, Montana Avenue events, and public venue addresses are identified.</div>
+<div class="notice"><strong>Still to confirm:</strong> exact campsite site numbers; Saturday’s South Fork Park meeting time; the vehicle shuttle assignments for Monday’s self-guided Provo River float; Timpanogos Cave ticket times<span id="formActivationNotice">; and the final shared Google Form link</span>. The campground, church, river put-in and take-out, Heber pickleball park, South Weber rodeo, Tuesday lunch park, Montana Avenue events, and public venue addresses are identified.</div>
 
 <section class="quick" aria-label="Quick facts">
   <div><b>3:00 PM</b>Saturday campsite check-in</div>
@@ -96,7 +96,7 @@ details{margin-top:14px} summary{cursor:pointer;font-weight:750;color:#24483f}
   <p style="margin-top:0"><strong>Best setup:</strong> one Google Form response per household, with an adult count and child count for each of the six group meals.</p>
   <p id="liveRsvpPending" class="caution"><strong>The shared form has not been activated yet.</strong> The Archimedes setup issue includes the final step for creating it and placing the live link here.</p>
   <p id="liveRsvpReady" hidden><a class="button" id="liveRsvpLink" href="#" target="_blank" rel="noopener">Open the Hazard reunion meal RSVP</a></p>
-  <p class="caution">Until the shared form is live, the response builder below can prepare an RSVP for text or email, but it does not centrally collect submissions.</p>
+  <p id="localBuilderNote" class="caution">Until the shared form is live, the response builder below can prepare an RSVP for text or email, but it does not centrally collect submissions.</p>
  </div>
 
  <div id="rsvp-builder" class="card">
@@ -363,6 +363,8 @@ if (liveRsvpUrl) {
   link.href = liveRsvpUrl;
   document.getElementById('liveRsvpReady').hidden = false;
   document.getElementById('liveRsvpPending').hidden = true;
+  document.getElementById('formActivationNotice').hidden = true;
+  document.getElementById('localBuilderNote').textContent = 'Prefer a text or email RSVP? The response builder below is still available as a personal backup.';
 }
 
 const meals = [

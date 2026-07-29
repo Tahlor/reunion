@@ -87,6 +87,7 @@ def create_app(test_config: dict[str, Any] | None = None) -> Flask:
         ADMIN_USERS=parse_csv(os.environ.get("REUNION_ADMIN_USERS", "tahlor,tahlor@gmail.com")),
         CODEX_RUNNER=(os.environ.get("REUNION_CODEX_RUNNER") or "").strip(),
         CODEX_TIMEOUT_SECONDS=int(os.environ.get("REUNION_CODEX_TIMEOUT_SECONDS", "1800")),
+        RSVP_RESULTS_URL=(os.environ.get("REUNION_RSVP_RESULTS_URL") or "").strip(),
         PUBLISH_SCRIPT=str(repo_root / "deploy" / "publish.sh"),
         SESSION_COOKIE_NAME="reunion_admin_session",
         SESSION_COOKIE_HTTPONLY=True,
@@ -151,6 +152,14 @@ def register_routes(app: Flask) -> None:
     @require_admin
     def api_me() -> Response:
         return jsonify({"ok": True, "user": g.reunion_user.actor, "canonical": g.reunion_user.canonical_username})
+
+    @app.get(f"{URL_PREFIX}/api/rsvp")
+    @require_admin
+    def rsvp_api() -> Response:
+        return jsonify({
+            "form_url": public_rsvp_url(),
+            "results_url": private_rsvp_results_url(),
+        })
 
     @app.get(f"{URL_PREFIX}/api/document")
     @require_admin
@@ -365,6 +374,25 @@ def read_document() -> str:
     if not path.is_file():
         raise RuntimeError(f"Missing reunion document: {path}")
     return path.read_text(encoding="utf-8")
+
+
+def safe_external_link(value: str) -> str | None:
+    parsed = urlsplit(value.strip())
+    if parsed.scheme not in {"http", "https"} or not parsed.netloc:
+        return None
+    return value.strip()
+
+
+def public_rsvp_url() -> str | None:
+    config_path = Path(current_app.config["REPO_ROOT"]) / "config.js"
+    if not config_path.is_file():
+        return None
+    match = re.search(r"rsvpFormUrl\s*:\s*(['\"])(.*?)\1", config_path.read_text(encoding="utf-8"))
+    return safe_external_link(match.group(2)) if match else None
+
+
+def private_rsvp_results_url() -> str | None:
+    return safe_external_link(str(current_app.config.get("RSVP_RESULTS_URL") or ""))
 
 
 def main_bounds(document: str) -> tuple[int, int]:

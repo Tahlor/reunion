@@ -12,8 +12,8 @@
 </head>
 <body>
 <div class="shell">
- <div class="top"><h1>Hazard Reunion Admin</h1><span>Signed in as <strong>{{ actor }}</strong></span><span class="spacer"></span><a class="button" href="{{ url_prefix }}/">View site</a><a class="button" href="{{ url_prefix }}/edit">Visual editor</a></div>
- <div class="status">Codex: <strong id="codexStatus">checking…</strong> <span id="busyStatus"></span></div>
+ <div class="top"><h1>Hazard Reunion Admin</h1><span>Signed in as <strong>{{ actor }}</strong></span><span class="spacer"></span><a class="button" href="{{ url_prefix }}/">View site</a><a class="button" href="{{ url_prefix }}/edit">Visual editor</a><a class="button" id="rsvpFormLink" hidden target="_blank" rel="noopener">Open RSVP form</a><a class="button" id="rsvpResultsLink" hidden target="_blank" rel="noopener">Review RSVP results</a></div>
+ <div class="status">Codex: <strong id="codexStatus">checking…</strong> <span id="busyStatus"></span> <span id="rsvpStatus"></span></div>
  <div class="banner hidden" id="setupBanner">The chat page is installed, but the Archimedes agent still needs to connect it to a persistent Codex CLI/SDK session for this repository.</div>
  <div class="chat" id="chat"><div class="empty">Loading conversation…</div></div>
  <div class="composer">
@@ -34,9 +34,13 @@ function render(turns){
 }
 async function refresh(){
  try{
-  const [statusResponse,turnsResponse]=await Promise.all([fetch(PREFIX+'/api/codex/status'),fetch(PREFIX+'/api/codex/turns')]);
-  const status=await statusResponse.json(),turnData=await turnsResponse.json();busy=Boolean(status.busy);sendButton.disabled=busy||!status.configured;
+  const [statusResponse,turnsResponse,rsvpResponse]=await Promise.all([fetch(PREFIX+'/api/codex/status'),fetch(PREFIX+'/api/codex/turns'),fetch(PREFIX+'/api/rsvp')]);
+  const status=await statusResponse.json(),turnData=await turnsResponse.json(),rsvp=await rsvpResponse.json();busy=Boolean(status.busy);sendButton.disabled=busy||!status.configured;
   document.getElementById('codexStatus').textContent=status.configured?'connected':'not configured';document.getElementById('busyStatus').textContent=busy?' · working':'';document.getElementById('setupBanner').classList.toggle('hidden',status.configured);render(turnData.turns||[]);
+  const formLink=document.getElementById('rsvpFormLink'),resultsLink=document.getElementById('rsvpResultsLink');
+  formLink.hidden=!rsvp.form_url;if(rsvp.form_url)formLink.href=rsvp.form_url;
+  resultsLink.hidden=!rsvp.results_url;if(rsvp.results_url)resultsLink.href=rsvp.results_url;
+  document.getElementById('rsvpStatus').textContent=rsvp.results_url?' · RSVP results ready':(rsvp.form_url?' · RSVP form ready':' · RSVP links not configured');
  }catch(error){document.getElementById('codexStatus').textContent='unavailable'}
 }
 async function send(){
