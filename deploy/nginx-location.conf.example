@@ -1,0 +1,22 @@
+# Add these locations inside the existing HTTPS server block for
+# taylorarchibald.com. The site is static and intentionally lives at /reunion/.
+
+location = /reunion {
+    return 301 /reunion/;
+}
+
+# Keep config.js fresh so the RSVP URL appears immediately after deployment.
+location = /reunion/config.js {
+    alias /var/www/taylorarchibald.com/reunion/config.js;
+    default_type application/javascript;
+    add_header Cache-Control "no-store, max-age=0" always;
+    add_header X-Content-Type-Options "nosniff" always;
+}
+
+location /reunion/ {
+    alias /var/www/taylorarchibald.com/reunion/;
+    index index.html;
+    autoindex off;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+}
