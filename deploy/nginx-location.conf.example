@@ -1,8 +1,50 @@
 # Add these locations inside the existing HTTPS server block for
-# taylorarchibald.com. The site is static and intentionally lives at /reunion/.
+# taylorarchibald.com. The public reunion page stays static, while edit/admin/API
+# requests go to the SSO-aware reunion service on 127.0.0.1:13041.
 
 location = /reunion {
     return 301 /reunion/;
+}
+
+location = /reunion/edit {
+    proxy_pass http://127.0.0.1:13041;
+    include proxy_params;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-Forwarded-Host $host;
+    proxy_read_timeout 60s;
+    add_header Cache-Control "no-store, max-age=0" always;
+}
+
+location = /reunion/admin {
+    proxy_pass http://127.0.0.1:13041;
+    include proxy_params;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-Forwarded-Host $host;
+    proxy_read_timeout 60s;
+    add_header Cache-Control "no-store, max-age=0" always;
+}
+
+location = /reunion/health {
+    proxy_pass http://127.0.0.1:13041;
+    include proxy_params;
+}
+
+location = /reunion/sso/login {
+    proxy_pass http://127.0.0.1:13041;
+    include proxy_params;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-Forwarded-Host $host;
+    add_header Cache-Control "no-store, max-age=0" always;
+}
+
+location /reunion/api/ {
+    proxy_pass http://127.0.0.1:13041;
+    include proxy_params;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-Forwarded-Host $host;
+    proxy_read_timeout 60s;
+    client_max_body_size 2m;
+    add_header Cache-Control "no-store, max-age=0" always;
 }
 
 # Keep config.js fresh so the RSVP URL appears immediately after deployment.
