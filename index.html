@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hazard Family Reunion — August 1–8, 2026</title>
+<style>
+:root{
+  --ink:#1f2937;--muted:#667085;--paper:#fffdf8;--page:#edf2ef;
+  --accent:#315f52;--accent2:#e8f1ed;--line:#d8dedb;
+  --warn:#fff4d6;--warnline:#d8a51d;--meal:#7c3f58;--mealbg:#f7edf1;
+  --button:#225a4d;--soft:#f6f7f5;--blue:#185c8c;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--page);color:var(--ink);font:16px/1.52 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+main{max-width:1020px;margin:0 auto;background:var(--paper);min-height:100vh;padding:38px 34px 64px;box-shadow:0 0 35px #18261f18}
+h1{margin:.1rem 0 .35rem;font:800 clamp(2rem,5vw,3.4rem)/1.03 Georgia,serif;color:#24483f}
+h2{font:750 1.5rem/1.2 Georgia,serif;color:#24483f;margin:0}
+h3{margin:0 0 10px;color:#24483f;font-size:1.08rem}
+.subtitle{color:var(--muted);font-size:1.05rem}
+.updated{margin-top:5px;color:var(--muted);font-size:.9rem}
+.notice{background:var(--warn);border-left:5px solid var(--warnline);padding:13px 16px;margin:24px 0;border-radius:6px}
+.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:24px 0}
+.quick div{background:var(--accent2);padding:12px;border-radius:9px;text-align:center}
+.quick b{display:block;font-size:1.15rem;color:var(--accent)}
+.jump{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 4px}
+.jump a,.button{display:inline-block;border:0;border-radius:7px;padding:8px 11px;background:var(--button);color:#fff;text-decoration:none;font-weight:700;cursor:pointer;font:inherit}
+.button.secondary,.jump a.secondary{background:#e7ecea;color:#24483f}
+.button:disabled{background:#aeb9b5;cursor:not-allowed}
+.day{border-top:1px solid var(--line);padding:25px 0 5px;scroll-margin-top:12px}
+.dayhead{display:flex;align-items:baseline;gap:12px;margin-bottom:12px}
+.date{color:var(--muted);font-weight:650}
+.item{display:grid;grid-template-columns:98px 1fr;gap:14px;padding:9px 0}
+.time{font-weight:750;color:var(--accent)}
+.item strong{font-size:1.03rem}
+.details{color:var(--muted);margin-top:3px}
+.meal strong{color:var(--meal)}
+a{color:var(--blue);text-underline-offset:2px}
+.tag{display:inline-block;font-size:.77rem;font-weight:700;padding:2px 7px;border-radius:999px;background:#edf0f2;color:#4a5563;margin-left:6px;vertical-align:2px}
+.hosted{background:#f6eaf0;color:var(--meal)}
+.resolved{background:#e9f4eb;color:#27643a}
+.addr{font-style:normal}
+.card{border:1px solid var(--line);background:var(--soft);border-radius:10px;padding:17px;margin:13px 0}
+.meal-card{background:var(--mealbg);border-color:#e4cbd5}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.rsvp-row{display:grid;grid-template-columns:minmax(260px,1fr) 115px 115px;gap:10px;align-items:end;padding:10px 0;border-top:1px solid #e3d5db}
+.rsvp-row:first-child{border-top:0}
+label{font-weight:650}
+label small{display:block;font-weight:400;color:var(--muted)}
+input,textarea,select{width:100%;font:inherit;padding:8px 9px;border:1px solid #bdc7c3;border-radius:6px;background:#fff;color:var(--ink)}
+textarea{min-height:90px;resize:vertical}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+.output{white-space:pre-wrap;background:#fff;border:1px solid var(--line);border-radius:7px;padding:12px;margin-top:12px;min-height:72px;color:#344054}
+.status{margin-top:8px;font-size:.9rem;color:var(--accent);font-weight:650}
+details{margin-top:14px} summary{cursor:pointer;font-weight:750;color:#24483f}
+.codebox{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.88rem;min-height:245px}
+.checklist{columns:2;column-gap:36px;margin-top:8px}.checklist label{display:block;break-inside:avoid;padding:4px 0;font-weight:400}.checklist input{width:auto;margin-right:8px}
+.sources{font-size:.88rem;color:var(--muted);margin-top:38px;border-top:1px solid var(--line);padding-top:18px}
+.transcription{background:#f7f7f4;border:1px solid var(--line);padding:16px 18px;border-radius:8px;white-space:pre-line;font-size:.93rem}
+.caution{font-size:.92rem;color:#694d00}
+.printnote{display:none}
+@media(max-width:760px){
+ main{padding:24px 18px}.quick{grid-template-columns:repeat(2,1fr)}.item{grid-template-columns:78px 1fr}.checklist{columns:1}.grid2{grid-template-columns:1fr}.rsvp-row{grid-template-columns:1fr 1fr}.rsvp-row .meal-name{grid-column:1/-1}
+}
+@media print{
+ body{background:white}main{box-shadow:none;max-width:none;padding:0}.day{break-inside:avoid}.notice,.card{break-inside:avoid}.printnote{display:block}.sources a{color:inherit;text-decoration:none}.jump,.actions,#rsvp-builder details{display:none}
+}
+</style>
+</head>
+<body><main>
+<header>
+  <div class="subtitle">Family reunion / camping week</div>
+  <h1>Hazard Family Reunion</h1>
+  <div class="subtitle">Saturday, August 1 through Saturday, August 8, 2026 · Utah County, Wasatch County &amp; South Weber</div>
+  <div class="updated">Updated July 29, 2026</div>
+</header>
+
+<div class="notice"><strong>Still to confirm:</strong> exact campsite site numbers; Saturday’s South Fork Park meeting time; the vehicle shuttle assignments for Monday’s self-guided Provo River float; Timpanogos Cave ticket times; and the final shared Google Form link. The campground, church, river put-in and take-out, Heber pickleball park, South Weber rodeo, Tuesday lunch park, Montana Avenue events, and public venue addresses are identified.</div>
+
+<section class="quick" aria-label="Quick facts">
+  <div><b>3:00 PM</b>Saturday campsite check-in</div>
+  <div><b>6</b>group meals needing counts</div>
+  <div><b>3</b>group dinners at camp</div>
+  <div><b>Saturday</b>pack up &amp; check out</div>
+</section>
+
+<nav class="jump" aria-label="Page links">
+  <a href="#rsvp">Meal RSVP</a>
+  <a class="secondary" href="#sat1">Sat. Aug. 1</a><a class="secondary" href="#sun">Sunday</a><a class="secondary" href="#mon">Monday</a><a class="secondary" href="#tue">Tuesday</a><a class="secondary" href="#wed">Wednesday</a><a class="secondary" href="#thu">Thursday</a><a class="secondary" href="#fri">Friday</a><a class="secondary" href="#sat2">Sat. Aug. 8</a>
+</nav>
+
+<section class="day" id="rsvp">
+ <div class="dayhead"><h2>Group-meal RSVP</h2><span class="date">Adults + children</span></div>
+ <div class="card meal-card">
+  <p style="margin-top:0"><strong>Best setup:</strong> one Google Form response per household, with an adult count and child count for each of the six group meals.</p>
+  <p id="liveRsvpPending" class="caution"><strong>The shared form has not been activated yet.</strong> The Archimedes setup issue includes the final step for creating it and placing the live link here.</p>
+  <p id="liveRsvpReady" hidden><a class="button" id="liveRsvpLink" href="#" target="_blank" rel="noopener">Open the Hazard reunion meal RSVP</a></p>
+  <p class="caution">Until the shared form is live, the response builder below can prepare an RSVP for text or email, but it does not centrally collect submissions.</p>
+ </div>
+
+ <div id="rsvp-builder" class="card">
+  <div class="grid2">
+   <div><label for="household">Family / household name</label><input id="household" placeholder="e.g., Taylor &amp; family"></div>
+   <div><label for="contact">Contact phone or email <small>Optional</small></label><input id="contact" placeholder="Phone or email"></div>
+  </div>
+
+  <div style="margin-top:15px">
+   <div class="rsvp-row"><div class="meal-name"><label>Sunday, Aug. 2 — 3:00 PM lunch/dinner at camp</label></div><div><label for="m1a">Adults</label><input id="m1a" type="number" min="0" max="50" value="0"></div><div><label for="m1k">Children</label><input id="m1k" type="number" min="0" max="50" value="0"></div></div>
+   <div class="rsvp-row"><div class="meal-name"><label>Monday, Aug. 3 — dinner at camp</label></div><div><label for="m2a">Adults</label><input id="m2a" type="number" min="0" max="50" value="0"></div><div><label for="m2k">Children</label><input id="m2k" type="number" min="0" max="50" value="0"></div></div>
+   <div class="rsvp-row"><div class="meal-name"><label>Tuesday, Aug. 4 — lunch at North Park</label></div><div><label for="m3a">Adults</label><input id="m3a" type="number" min="0" max="50" value="0"></div><div><label for="m3k">Children</label><input id="m3k" type="number" min="0" max="50" value="0"></div></div>
+   <div class="rsvp-row"><div class="meal-name"><label>Wednesday, Aug. 5 — dinner at camp</label></div><div><label for="m4a">Adults</label><input id="m4a" type="number" min="0" max="50" value="0"></div><div><label for="m4k">Children</label><input id="m4k" type="number" min="0" max="50" value="0"></div></div>
+   <div class="rsvp-row"><div class="meal-name"><label>Thursday, Aug. 6 — dinner &amp; dance at the Montana Avenue backyard</label></div><div><label for="m5a">Adults</label><input id="m5a" type="number" min="0" max="50" value="0"></div><div><label for="m5k">Children</label><input id="m5k" type="number" min="0" max="50" value="0"></div></div>
+   <div class="rsvp-row"><div class="meal-name"><label>Friday, Aug. 7 — dinner at camp</label></div><div><label for="m6a">Adults</label><input id="m6a" type="number" min="0" max="50" value="0"></div><div><label for="m6k">Children</label><input id="m6k" type="number" min="0" max="50" value="0"></div></div>
+  </div>
+
+  <div style="margin-top:15px"><label for="diet">Dietary restrictions or meal notes <small>Allergies, vegetarian needs, uncertain attendance, etc.</small></label><textarea id="diet"></textarea></div>
+  <div class="actions"><button class="button" type="button" onclick="buildRsvp()">Prepare RSVP</button><button class="button secondary" type="button" onclick="copyRsvp()">Copy RSVP</button><button class="button secondary" type="button" onclick="shareRsvp()">Share / text RSVP</button><a class="button secondary" id="emailRsvp" href="#">Email RSVP</a></div>
+  <div id="rsvpOutput" class="output">Fill in the counts, then choose “Prepare RSVP.”</div>
+  <div id="rsvpStatus" class="status" aria-live="polite"></div>
+
+  <details>
+   <summary>Google Form blueprint — copy these questions</summary>
+   <p>Create a new form at <a href="https://forms.new" target="_blank" rel="noopener">forms.new</a>. Use one required household-name question, then two required number/dropdown questions per meal. Allow 0 as a valid response so each family explicitly indicates which meals they are skipping.</p>
+   <textarea id="formBlueprint" class="codebox" readonly>FORM TITLE
+Hazard Family Reunion — Group Meal RSVP
+
+FORM DESCRIPTION
+Please submit one response per household. Enter the number of adults and children who will attend each group meal. Use 0 if no one from your household will attend that meal. Please update your response if your plans change.
+
+QUESTIONS
+1. Family / household name — Short answer — REQUIRED
+2. Contact phone or email — Short answer — Optional
+
+3. Sunday Aug. 2, 3:00 PM lunch/dinner at camp — Adults — Number or dropdown 0–20 — REQUIRED
+4. Sunday Aug. 2, 3:00 PM lunch/dinner at camp — Children — Number or dropdown 0–20 — REQUIRED
+
+5. Monday Aug. 3 dinner at camp — Adults — Number or dropdown 0–20 — REQUIRED
+6. Monday Aug. 3 dinner at camp — Children — Number or dropdown 0–20 — REQUIRED
+
+7. Tuesday Aug. 4 lunch at North Park — Adults — Number or dropdown 0–20 — REQUIRED
+8. Tuesday Aug. 4 lunch at North Park — Children — Number or dropdown 0–20 — REQUIRED
+
+9. Wednesday Aug. 5 dinner at camp — Adults — Number or dropdown 0–20 — REQUIRED
+10. Wednesday Aug. 5 dinner at camp — Children — Number or dropdown 0–20 — REQUIRED
+
+11. Thursday Aug. 6 dinner & dance at the Montana Avenue backyard — Adults — Number or dropdown 0–20 — REQUIRED
+12. Thursday Aug. 6 dinner & dance at the Montana Avenue backyard — Children — Number or dropdown 0–20 — REQUIRED
+
+13. Friday Aug. 7 dinner at camp — Adults — Number or dropdown 0–20 — REQUIRED
+14. Friday Aug. 7 dinner at camp — Children — Number or dropdown 0–20 — REQUIRED
+
+15. Dietary restrictions / allergies / notes — Paragraph — Optional
+
+RECOMMENDED SETTINGS
+- Collect email addresses: optional
+- Allow response editing: ON
+- Limit to one response: OFF (avoids requiring every relative to sign into Google)
+- Link responses to a Google Sheet
+- RSVP deadline: add the date you choose to the form description
+
+SHEET TOTALS
+Google Forms will put Timestamp in column A, then the questions above in columns B–P. In a new sheet tab, use:
+
+Meal | Adults | Children | Total
+Sunday camp meal | =SUM('Form Responses 1'!D2:D) | =SUM('Form Responses 1'!E2:E) | =B2+C2
+Monday camp dinner | =SUM('Form Responses 1'!F2:F) | =SUM('Form Responses 1'!G2:G) | =B3+C3
+Tuesday North Park lunch | =SUM('Form Responses 1'!H2:H) | =SUM('Form Responses 1'!I2:I) | =B4+C4
+Wednesday camp dinner | =SUM('Form Responses 1'!J2:J) | =SUM('Form Responses 1'!K2:K) | =B5+C5
+Thursday backyard dinner | =SUM('Form Responses 1'!L2:L) | =SUM('Form Responses 1'!M2:M) | =B6+C6
+Friday camp dinner | =SUM('Form Responses 1'!N2:N) | =SUM('Form Responses 1'!O2:O) | =B7+C7
+
+Column P contains dietary restrictions and notes. If the response sheet has a different name, replace “Form Responses 1” in the formulas.</textarea>
+   <div class="actions"><button class="button secondary" type="button" onclick="copyBlueprint()">Copy form blueprint</button></div>
+  </details>
+
+  <details>
+   <summary>Create the real Google Form automatically</summary>
+   <p>The companion Google Apps Script creates the complete RSVP form, links it to a response spreadsheet, and adds a live totals tab for adults, children, and total attendance at every group meal.</p>
+   <ol>
+    <li>Open <a href="https://script.new" target="_blank" rel="noopener">script.new</a> while signed into the Google account that should own the form.</li>
+    <li>Download and open <a href="create_hazard_rsvp_form.gs">create_hazard_rsvp_form.gs</a>, then paste its contents into the Apps Script editor.</li>
+    <li>Run <code>createHazardMealRsvp</code> and approve the requested Google Forms and Sheets permissions.</li>
+    <li>Open the new <strong>Hazard Family Reunion — Group Meal RSVP — Responses</strong> spreadsheet. Its <strong>Meal Totals</strong> tab contains the public RSVP link, the form-edit link, and live headcounts.</li>
+   </ol>
+  </details>
+ </div>
+</section>
+
+<section class="day" id="sat1">
+ <div class="dayhead"><h2>Saturday</h2><span class="date">August 1</span></div>
+ <div class="item"><div class="time">TBD</div><div><strong>Meet at South Fork Park</strong><div class="details"><address class="addr">4988 N South Fork Road, Provo, UT 84604</address><a href="https://www.google.com/maps/search/?api=1&amp;query=4988+N+South+Fork+Road+Provo+UT+84604" target="_blank" rel="noopener">Open in Google Maps</a></div></div></div>
+ <div class="item"><div class="time">3:00 PM</div><div><strong>Great Horned Owl Campground check-in begins</strong><span class="tag resolved">location resolved</span><div class="details"><address class="addr">Great Horned Owl Campground, Deer Creek State Park<br>Main entrance: 5566 UT-314, Wallsburg, UT 84082<br>Campground GPS: 40.41394, -111.50460</address><a href="https://www.google.com/maps/search/?api=1&amp;query=40.41394%2C-111.50460" target="_blank" rel="noopener">Open exact campground location</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=5566+UT-314+Wallsburg+UT+84082" target="_blank" rel="noopener">Open the main entrance</a> · Park information: <a href="tel:+14356540171">435-654-0171</a> · Reservations: <a href="tel:+18003223770">800-322-3770</a><br>Enter through Deer Creek State Park’s main entrance; Great Horned Owl is just inside the park. Check-in is 3:00 PM and check-out is noon. The campground has no hookups; sites have picnic tables, charcoal grills and fire rings, with flush restrooms and showers nearby.</div></div></div>
+ <div class="item meal"><div class="time">Evening</div><div><strong>Dinner on your own</strong></div></div>
+</section>
+
+<section class="day" id="sun">
+ <div class="dayhead"><h2>Sunday</h2><span class="date">August 2</span></div>
+ <div class="item meal"><div class="time">Morning</div><div><strong>Breakfast on your own</strong></div></div>
+ <div class="item"><div class="time">10:30 AM</div><div><strong>Church in Provo</strong><span class="tag resolved">address resolved</span><div class="details"><address class="addr">The Church of Jesus Christ of Latter-day Saints<br>1625 South Slate Canyon Drive, Provo, UT 84606</address><a href="https://www.google.com/maps/search/?api=1&amp;query=1625+South+Slate+Canyon+Drive+Provo+UT+84606" target="_blank" rel="noopener">Open in Google Maps</a><br>This is the meetinghouse next to Nevada Avenue and California Avenue. The reunion plan calls for church at 10:30 AM.</div></div></div>
+ <div class="item meal"><div class="time">3:00 PM</div><div><strong>Group lunch / dinner at camp</strong><span class="tag hosted">RSVP meal 1</span></div></div>
+ <div class="item"><div class="time">Afterward</div><div><strong>Crafts and games at camp</strong></div></div>
+</section>
+
+<section class="day" id="mon">
+ <div class="dayhead"><h2>Monday</h2><span class="date">August 3</span></div>
+ <div class="item meal"><div class="time">Morning</div><div><strong>Breakfast on your own</strong></div></div>
+ <div class="item"><div class="time">Before 9</div><div><strong>Pack a lunch to go</strong></div></div>
+ <div class="item"><div class="time">9:00 AM</div><div><strong>Hike at Big Springs Park</strong><div class="details"><address class="addr">7201 N South Fork Road, Provo, UT 84604</address><a href="https://www.google.com/maps/search/?api=1&amp;query=7201+N+South+Fork+Road+Provo+UT+84604" target="_blank" rel="noopener">Open in Google Maps</a></div></div></div>
+ <div class="item meal"><div class="time">Midday</div><div><strong>Picnic lunch at Big Springs Park</strong><span class="tag">on your own</span></div></div>
+ <div class="item"><div class="time">After lunch</div><div><strong>Self-guided Provo River float</strong><span class="tag resolved">route resolved</span><div class="details">
+  <strong>Bring your own kayaks, tubes or raft, paddles and properly fitted life jackets.</strong> This is not an outfitter trip, so there is no equipment rental or commercial shuttle included.<br>
+  <strong>Put-in:</strong> Lower Provo River Park, immediately below Deer Creek Dam. <a href="https://www.google.com/maps/search/?api=1&amp;query=Lower+Provo+River+Park+Utah" target="_blank" rel="noopener">Open put-in in Google Maps</a>.<br>
+  <strong>Take-out:</strong> Vivian Park, <address class="addr" style="display:inline">6828 South Fork Road, Provo, UT 84606</address>. <a href="https://www.google.com/maps/search/?api=1&amp;query=Vivian+Park+6828+South+Fork+Road+Provo+UT" target="_blank" rel="noopener">Open take-out in Google Maps</a>.<br>
+  The standard lower-river float is roughly 5–6 miles and commonly takes about 1–1½ hours depending on flow. Stage enough vehicles at Vivian Park before launching, shuttle drivers back to the put-in, and retrieve the put-in vehicles afterward. Lower Provo River Park has a Deer Creek State Park day-use fee.<br>
+  <strong>Safety:</strong> Utah requires every person on a river vessel—including an inner tube—to wear a properly sized U.S. Coast Guard-approved life jacket. The water is about 45°F, secure river shoes are strongly recommended, and the angled supports at the Wildwood railroad trestle are the principal obstacle on this stretch. Check the day’s river flow and weather before launching.</div></div></div>
+ <div class="item"><div class="time">Evening</div><div><strong>Pickleball at Southfield Park</strong><span class="tag resolved">location resolved</span><div class="details"><address class="addr">1200 W Midway Lane, Heber City, UT 84032</address><a href="https://www.google.com/maps/search/?api=1&amp;query=Southfield+Park+Pickleball+Courts+Heber+City+UT" target="_blank" rel="noopener">Open the pickleball courts in Google Maps</a><br>Outdoor dedicated courts; bring paddles and balls.</div></div></div>
+ <div class="item meal"><div class="time">Evening</div><div><strong>Dinner at camp</strong><span class="tag hosted">RSVP meal 2</span></div></div>
+</section>
+
+<section class="day" id="tue">
+ <div class="dayhead"><h2>Tuesday</h2><span class="date">August 4</span></div>
+ <div class="item meal"><div class="time">Morning</div><div><strong>Breakfast on your own</strong></div></div>
+ <div class="item"><div class="time">8:00 AM</div><div><strong>Leave for Provo Recreation Center</strong><div class="details"><address class="addr">320 W 500 N, Provo, UT 84601</address><a href="https://www.google.com/maps/search/?api=1&amp;query=320+W+500+N+Provo+UT+84601" target="_blank" rel="noopener">Open in Google Maps</a> · <a href="tel:+18018526600">801-852-6600</a></div></div></div>
+ <div class="item"><div class="time">8 AM–lunch</div><div><strong>Basketball, wallyball and pickleball</strong><div class="details">The indoor activity pool and lazy river are scheduled to be closed August 3–5 for maintenance. Other aquatic areas may still be available, but confirm at the front desk that morning.</div></div></div>
+ <div class="item meal"><div class="time">Lunch</div><div><strong>Group lunch at North Park</strong><span class="tag hosted">RSVP meal 3</span><span class="tag resolved">park resolved</span><div class="details"><address class="addr">North Park, 500 N 500 W, Provo, UT 84601</address>The park is immediately beside the Recreation Center. <a href="https://www.google.com/maps/search/?api=1&amp;query=North+Park+500+N+500+W+Provo+UT" target="_blank" rel="noopener">Open in Google Maps</a></div></div></div>
+ <div class="item"><div class="time">After lunch</div><div><strong>Swimming at Provo Recreation Center</strong><div class="details">The outdoor pool is scheduled to be open noon–8:00 PM. Confirm which indoor pools are available because of the August 3–5 maintenance closure.</div></div></div>
+ <div class="item"><div class="time">4:00 PM</div><div><strong>Leave for the South Weber Little Buckaroo Rodeo</strong><span class="tag resolved">event resolved</span><div class="details"><strong>Rodeo starts at 5:30 PM.</strong><br><address class="addr">South Weber Posse Grounds<br>675 E Old Fort Road (6650 S), South Weber, UT 84405</address><a href="https://www.google.com/maps/search/?api=1&amp;query=South+Weber+Posse+Grounds+675+E+Old+Fort+Road+South+Weber+UT+84405" target="_blank" rel="noopener">Open in Google Maps</a> · <a href="https://southwebercity.gov/country-fair-days/" target="_blank" rel="noopener">Official Country Fair Days page</a><br>Event contact: Alexx Keetch, <a href="tel:+18013891664">801-389-1664</a>. The 2026 local event listing gives a 5:30 PM start; recheck the city flyer before leaving. Anyone participating rather than watching should confirm registration requirements directly.</div></div></div>
+ <div class="item meal"><div class="time">Evening</div><div><strong>Dinner on your own</strong></div></div>
+</section>
+
+<section class="day" id="wed">
+ <div class="dayhead"><h2>Wednesday</h2><span class="date">August 5</span></div>
+ <div class="item meal"><div class="time">Morning</div><div><strong>Breakfast on your own</strong></div></div>
+ <div class="item"><div class="time">8:20 AM</div><div><strong>Leave camp for Timpanogos Cave</strong><div class="details"><address class="addr">2038 W Alpine Loop Road, American Fork, UT 84003</address><a href="https://www.google.com/maps/search/?api=1&amp;query=Timpanogos+Cave+National+Monument" target="_blank" rel="noopener">Open in Google Maps</a></div></div></div>
+ <div class="item"><div class="time">Morning</div><div><strong>Timpanogos Cave hike / tour</strong><div class="details">A cave-tour ticket is required. The ticket time is when the 1.5-mile uphill hike begins; allow at least 3 hours total. Bring at least 1 liter of water per person, closed-toe shoes and a light jacket for the 43–48°F cave. No strollers or external-frame child carriers.</div></div></div>
+ <div class="item meal"><div class="time">Midday</div><div><strong>Lunch on your own</strong></div></div>
+ <div class="item"><div class="time">Afternoon</div><div><strong>Hang out at camp / lake</strong></div></div>
+ <div class="item meal"><div class="time">Evening</div><div><strong>Dinner at camp</strong><span class="tag hosted">RSVP meal 4</span></div></div>
+ <div class="item"><div class="time">Evening</div><div><strong>Pickleball at Southfield Park</strong><div class="details"><address class="addr">1200 W Midway Lane, Heber City, UT 84032</address><a href="https://www.google.com/maps/search/?api=1&amp;query=Southfield+Park+Pickleball+Courts+Heber+City+UT" target="_blank" rel="noopener">Open the courts in Google Maps</a></div></div></div>
+</section>
+
+<section class="day" id="thu">
+ <div class="dayhead"><h2>Thursday</h2><span class="date">August 6</span></div>
+ <div class="item meal"><div class="time">Morning</div><div><strong>Breakfast on your own</strong></div></div>
+ <div class="item"><div class="time">Before 10</div><div><strong>Pack a lunch for Splash Summit</strong><div class="details">Outside food cannot be brought inside. The handwritten plan is to leave lunch outside, exit to eat, and return; verify same-day re-entry at the gate.</div></div></div>
+ <div class="item"><div class="time">10 AM–5:30 PM</div><div><strong>Splash Summit Waterpark</strong><div class="details"><address class="addr">1330 E 300 N, Provo, UT 84606</address><a href="https://www.google.com/maps/search/?api=1&amp;query=1330+E+300+N+Provo+UT+84606" target="_blank" rel="noopener">Open in Google Maps</a> · <a href="tel:+13853092388">385-309-2388</a></div></div></div>
+ <div class="item meal"><div class="time">Evening</div><div><strong>Dinner and dance at the Montana Avenue backyard</strong><span class="tag hosted">RSVP meal 5</span><span class="tag resolved">address resolved</span><div class="details"><address class="addr">1973 Montana Avenue, Provo, UT 84606</address><a href="https://www.google.com/maps/search/?api=1&amp;query=1973+Montana+Avenue+Provo+UT+84606" target="_blank" rel="noopener">Open in Google Maps</a></div></div></div>
+</section>
+
+<section class="day" id="fri">
+ <div class="dayhead"><h2>Friday</h2><span class="date">August 7</span></div>
+ <div class="item"><div class="time">All day</div><div><strong>Camp / lake day</strong></div></div>
+ <div class="item meal"><div class="time">Morning &amp; noon</div><div><strong>Breakfast and lunch on your own</strong></div></div>
+ <div class="item meal"><div class="time">Evening</div><div><strong>Dinner at camp</strong><span class="tag hosted">RSVP meal 6</span></div></div>
+</section>
+
+<section class="day" id="sat2">
+ <div class="dayhead"><h2>Saturday</h2><span class="date">August 8</span></div>
+ <div class="item"><div class="time">By 12:00 PM</div><div><strong>Pack up and check out</strong><span class="tag resolved">checkout confirmed</span><div class="details">Deer Creek State Park campground checkout is noon.</div></div></div>
+ <div class="item"><div class="time">7:00 PM</div><div><strong>Madeline’s baby blessing</strong><span class="tag">location likely</span><div class="details">Mykel’s family is blessing Madeline. The current plan is to hold it in the backyard at <address class="addr" style="display:inline">1973 Montana Avenue, Provo, UT 84606</address>. <a href="https://www.google.com/maps/search/?api=1&amp;query=1973+Montana+Avenue+Provo+UT+84606" target="_blank" rel="noopener">Open in Google Maps</a>. The backyard location is still described as probable rather than final.</div></div></div>
+</section>
+
+<section class="day">
+ <div class="dayhead"><h2>Bring / confirm</h2></div>
+ <div class="checklist">
+  <label><input type="checkbox"> Campsite reservation and site numbers</label>
+  <label><input type="checkbox"> Meal RSVPs and dietary notes</label>
+  <label><input type="checkbox"> Monday sack lunch</label>
+  <label><input type="checkbox"> River craft: kayaks, tubes or raft</label>
+  <label><input type="checkbox"> Paddles, river shoes and USCG-approved PFDs for everyone</label>
+  <label><input type="checkbox"> River shuttle vehicles and assigned drivers</label>
+  <label><input type="checkbox"> Swimsuits, towels and water shoes</label>
+  <label><input type="checkbox"> Pickleball paddles and balls</label>
+  <label><input type="checkbox"> Rec Center admission / membership plan</label>
+  <label><input type="checkbox"> Rodeo participation registration, if needed</label>
+  <label><input type="checkbox"> Timpanogos Cave tickets</label>
+  <label><input type="checkbox"> Hiking shoes and 1 L water/person</label>
+  <label><input type="checkbox"> Light jackets for the cave</label>
+  <label><input type="checkbox"> Thursday sack lunch / cooler</label>
+  <label><input type="checkbox"> Splash Summit tickets / passes</label>
+  <label><input type="checkbox"> Confirm Madeline blessing backyard location</label>
+ </div>
+</section>
+
+<section class="day">
+ <div class="dayhead"><h2>Faithful transcription of the handwritten pages</h2></div>
+ <div class="transcription">SATURDAY
+Meet @ South Fork Park
+Check in campsite begins at 3pm
+Dinner on your own
+
+SUNDAY
+Breakfast on your own
+Church in Provo @ 10:30
+* Lunch/Dinner @ 3pm
+Crafts and games at camp
+
+MONDAY
+Breakfast on your own
+Pack a lunch to go
+Hike Big Springs 9am
+Picnic lunch at Big Springs Park (on your own)
+Provo River float after lunch
+Pickleball in Heber in the evening
+* Dinner at camp
+
+TUESDAY
+Breakfast on your own
+Provo Rec Center — leave @ 8am
+Basketball / wallyball / pickleball, 8am–lunch
+* Lunch @ park w/ everyone
+Swimming after lunch
+Leave for rodeo at 4pm
+Dinner on your own
+
+WEDNESDAY
+Breakfast on your own
+Timp Caves — leave camp @ 8:20am
+Lunch on your own
+Hang out at camp/lake in afternoon
+* Dinner at camp
+Pickleball in Heber
+
+THURSDAY
+Breakfast on your own
+Pack a lunch for Splash Summit
+Splash Summit 10am–5:30pm
+(You can’t bring food in but can leave it out front and go out to eat then go back in)
+* Dinner and dance at Archibald backyard
+
+FRIDAY
+Camp/lake day
+Breakfast/lunch on your own
+* Dinner at camp
+
+SATURDAY
+Pack up and checkout</div>
+</section>
+
+<footer class="sources">
+ <strong>Location and schedule sources checked July 29, 2026:</strong>
+ <a href="https://stateparks.utah.gov/parks/deer-creek/facilities/" target="_blank" rel="noopener">Deer Creek State Park</a>;
+ <a href="https://local.churchofjesuschrist.org/en/us/ut/provo/1625-south-slate-canyon-drive" target="_blank" rel="noopener">meetinghouse listing</a>;
+ <a href="https://www.heberut.gov/facilities/facility/details/Southfield-Park-10" target="_blank" rel="noopener">Southfield Park</a>;
+ <a href="https://southwebercity.gov/country-fair-days/" target="_blank" rel="noopener">South Weber Country Fair Days</a> and <a href="https://discoverdavis.com/things-to-do-in-davis-county-august/" target="_blank" rel="noopener">2026 event-time listing</a>;
+ <a href="https://southwebercity.gov/city-parks/" target="_blank" rel="noopener">South Weber Posse Grounds</a>;
+ <a href="https://www.provo.gov/492/Recreation-Center" target="_blank" rel="noopener">Provo Recreation Center</a>;
+ <a href="https://www.provo.gov/955/Parks-List" target="_blank" rel="noopener">Provo parks list</a>;
+ <a href="https://publicworks.utahcounty.gov/parks" target="_blank" rel="noopener">Utah County parks</a>;
+ <a href="https://proraftingtours.com/outdoor-adventures/river-trips/international/united-states/utah/provo-river/" target="_blank" rel="noopener">Pro Rafting Tours’ lower-river access and safety guide</a>;
+ <a href="https://www.utahvalley.com/blog/post/tubing-provo-river/" target="_blank" rel="noopener">Utah Valley’s 2026 float guide</a>; and
+ <a href="https://recreation.utah.gov/life-jackets/" target="_blank" rel="noopener">Utah river life-jacket requirements</a>.
+ Private-home and family-event information was supplied directly by the family organizer. Event details can change, so recheck public venues shortly before the trip.
+</footer>
+</main>
+<script src="config.js"></script>
+<script>
+const reunionConfig = window.REUNION_CONFIG || {};
+const liveRsvpUrl = typeof reunionConfig.rsvpFormUrl === 'string' ? reunionConfig.rsvpFormUrl.trim() : '';
+if (liveRsvpUrl) {
+  const link = document.getElementById('liveRsvpLink');
+  link.href = liveRsvpUrl;
+  document.getElementById('liveRsvpReady').hidden = false;
+  document.getElementById('liveRsvpPending').hidden = true;
+}
+
+const meals = [
+  ['Sunday Aug. 2, 3:00 PM lunch/dinner at camp','m1a','m1k'],
+  ['Monday Aug. 3 dinner at camp','m2a','m2k'],
+  ['Tuesday Aug. 4 lunch at North Park','m3a','m3k'],
+  ['Wednesday Aug. 5 dinner at camp','m4a','m4k'],
+  ['Thursday Aug. 6 dinner & dance at the Montana Avenue backyard','m5a','m5k'],
+  ['Friday Aug. 7 dinner at camp','m6a','m6k']
+];
+function n(id){ const v=parseInt(document.getElementById(id).value,10); return Number.isFinite(v)&&v>=0?v:0; }
+function buildRsvp(){
+  const household=document.getElementById('household').value.trim()||'[Household name]';
+  const contact=document.getElementById('contact').value.trim();
+  const diet=document.getElementById('diet').value.trim();
+  let lines=[`HAZARD FAMILY REUNION — MEAL RSVP`,`Household: ${household}`];
+  if(contact) lines.push(`Contact: ${contact}`);
+  lines.push('');
+  meals.forEach(([name,a,k])=>{const av=n(a),kv=n(k);lines.push(`${name}: ${av} adult${av===1?'':'s'}, ${kv} child${kv===1?'':'ren'} (${av+kv} total)`);});
+  lines.push('',`Dietary restrictions / notes: ${diet||'None'}`);
+  const text=lines.join('\n');
+  document.getElementById('rsvpOutput').textContent=text;
+  document.getElementById('emailRsvp').href='mailto:?subject='+encodeURIComponent('Hazard Family Reunion meal RSVP — '+household)+'&body='+encodeURIComponent(text);
+  document.getElementById('rsvpStatus').textContent='RSVP prepared.';
+  return text;
+}
+async function copyRsvp(){
+  const text=buildRsvp();
+  try{await navigator.clipboard.writeText(text);document.getElementById('rsvpStatus').textContent='RSVP copied to the clipboard.';}
+  catch(e){document.getElementById('rsvpStatus').textContent='Copy was blocked by the browser. Select the prepared RSVP text and copy it manually.';}
+}
+async function shareRsvp(){
+  const text=buildRsvp();
+  if(navigator.share){
+    try{await navigator.share({title:'Hazard Family Reunion meal RSVP',text});document.getElementById('rsvpStatus').textContent='RSVP shared.';return;}catch(e){if(e.name==='AbortError')return;}
+  }
+  await copyRsvp();
+}
+async function copyBlueprint(){
+  const text=document.getElementById('formBlueprint').value;
+  try{await navigator.clipboard.writeText(text);document.getElementById('rsvpStatus').textContent='Google Form blueprint copied.';}
+  catch(e){document.getElementById('rsvpStatus').textContent='Copy was blocked. Select the blueprint and copy it manually.';}
+}
+buildRsvp();
+</script>
+</body></html>
