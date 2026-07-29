@@ -1,0 +1,21 @@
+[Unit]
+Description=Hazard Reunion admin and visual editor
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/Projects/reunion
+EnvironmentFile=/home/ubuntu/webapps_data/sso/sso-jwt.env
+EnvironmentFile=-/home/ubuntu/webapps_data/reunion/reunion.env
+ExecStart=/home/ubuntu/Projects/reunion/.venv/bin/waitress-serve --listen=127.0.0.1:13041 --call server.app:create_app
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target
