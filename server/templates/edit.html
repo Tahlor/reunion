@@ -89,7 +89,7 @@ function selectedDay(){return selected?.classList.contains('day')?selected:selec
 function uniqueId(prefix){return prefix+'-'+Date.now().toString(36)}
 function addSection(){
  const d=doc();const section=d.createElement('section');section.className='day';section.id=uniqueId('section');
- section.innerHTML='<div class="dayhead"><h2 contenteditable="true">New section</h2><span class="date" contenteditable="true">Date or subtitle</span></div><div class="item"><div class="time" contenteditable="true">Time</div><div contenteditable="true"><strong>New event</strong><div class="details">Add details here.</div></div></div>';
+ section.innerHTML='<div class="dayhead"><h2 contenteditable="true">New section</h2><span class="date" contenteditable="true">Date or subtitle</span></div><div class="item"><div class="time" contenteditable="true">Time</div><div contenteditable="true"><strong>New event</strong><details class="more"><summary>More details</summary><div class="detailbody">Add details here.</div></details></div></div>';
  const footer=d.querySelector('footer.sources');if(footer)footer.before(section);else d.querySelector('main').appendChild(section);selectBlock(section);setStatus('New section added — publish when ready.');section.scrollIntoView({behavior:'smooth',block:'center'});
 }
 function addItem(){
