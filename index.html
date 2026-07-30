@@ -50,7 +50,8 @@ h3{margin:0 0 10px;color:var(--forest);font-size:1.08rem}
 .meal strong{color:var(--berry)}
 a{color:var(--blue);text-underline-offset:2px}
 .tag{display:inline-block;font-size:.76rem;font-weight:750;padding:3px 8px;border-radius:999px;background:#edf0f2;color:#4a5563;margin-left:6px;vertical-align:2px}
-.hosted{background:#ffe0d0;color:#8f4935}
+.tag.own{background:#edf2f8;color:#36526f}
+.tag.together{background:#ffe0d0;color:#8f4935}
 .addr{font-style:normal}
 .card{border:1px solid var(--line);background:var(--soft);border-radius:10px;padding:17px;margin:13px 0}
 label{font-weight:650}
@@ -59,6 +60,9 @@ label small{display:block;font-weight:400;color:var(--muted)}
 .confirmations{background:var(--sunbg);border-color:#efd38f}.confirmations .dayhead h2{color:#7d5b15}.confirmations ul{margin:8px 0 0;padding-left:22px}.confirmations li{padding:4px 0}.confirmations li::marker{color:#c4861c}
 .bring{background:var(--sage)}
 .bring .dayhead h2::before{content:"✦ ";color:var(--coral)}
+.meal-guide{display:flex;flex-wrap:wrap;align-items:center;gap:8px 15px;padding:12px 14px;margin:13px 0 6px;border:1px solid #e4d9d0;border-radius:10px;background:#fff8f1;color:var(--muted)}
+.meal-guide strong{color:var(--forest)}
+.meal-guide .tag{margin-left:0}
 .printnote{display:none}
 @media(max-width:760px){
  main{padding:18px 13px 45px}header.hero{padding:25px 22px;border-radius:15px}header.hero::after{right:14px;top:20px;font-size:4.2rem}.item{grid-template-columns:1fr;gap:7px}.checklist{grid-template-columns:1fr}
@@ -83,66 +87,72 @@ label small{display:block;font-weight:400;color:var(--muted)}
   <a class="secondary" href="#sat1">Sat. Aug. 1</a><a class="secondary" href="#sun">Sunday</a><a class="secondary" href="#mon">Monday</a><a class="secondary" href="#tue">Tuesday</a><a class="secondary" href="#wed">Wednesday</a><a class="secondary" href="#thu">Thursday</a><a class="secondary" href="#fri">Friday</a><a class="secondary" href="#sat2">Sat. Aug. 8</a><a class="secondary" href="#confirm">Still to confirm</a>
 </nav>
 
+<div class="meal-guide" aria-label="Meal guide">
+ <strong>Meal guide</strong>
+ <span><span class="tag own">On your own</span> bring or buy your own food</span>
+ <span><span class="tag together">Eat together</span> reunion group meal</span>
+</div>
+
 <section class="day" id="sat1">
  <div class="dayhead"><h2>Saturday</h2><span class="date">August 1</span></div>
  <div class="item"><div class="time">TBD</div><div><strong>Meet at South Fork Park</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=4988+N+South+Fork+Road+Provo+UT+84604" target="_blank" rel="noopener">South Fork Park on Google Maps</a></div><details class="more"><summary>More details</summary><div class="detailbody"><address class="addr">4988 N South Fork Road, Provo, UT 84604</address></div></details></div></div></div>
  <div class="item"><div class="time">3:00 PM</div><div><strong>Great Horned Owl Campground check-in begins</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=40.41394%2C-111.50460" target="_blank" rel="noopener">Campground map</a><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=5566+UT-314+Wallsburg+UT+84082" target="_blank" rel="noopener">Main entrance map</a></div><details class="more"><summary>More details</summary><div class="detailbody"><address class="addr">Great Horned Owl Campground, Deer Creek State Park<br>Main entrance: 5566 UT-314, Wallsburg, UT 84082<br>Campground GPS: 40.41394, -111.50460</address>Park information: <a href="tel:+14356540171">435-654-0171</a> · Reservations: <a href="tel:+18003223770">800-322-3770</a><br>Enter through Deer Creek State Park’s main entrance; Great Horned Owl is just inside the park. Check-in is 3:00 PM and check-out is noon. The campground has no hookups; sites have picnic tables, charcoal grills and fire rings, with flush restrooms and showers nearby.</div></details></div></div></div>
- <div class="item meal"><div class="time">Evening</div><div><strong>Dinner on your own</strong></div></div>
+ <div class="item meal"><div class="time">Evening</div><div><strong>Dinner</strong><span class="tag own">on your own</span></div></div>
 </section>
 
 <section class="day" id="sun">
  <div class="dayhead"><h2>Sunday</h2><span class="date">August 2</span></div>
- <div class="item meal"><div class="time">Morning</div><div><strong>Breakfast on your own</strong></div></div>
+ <div class="item meal"><div class="time">Morning</div><div><strong>Breakfast</strong><span class="tag own">on your own</span></div></div>
  <div class="item"><div class="time">10:30 AM</div><div><strong>Church in Provo</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=1625+South+Slate+Canyon+Drive+Provo+UT+84606" target="_blank" rel="noopener">Meetinghouse on Google Maps</a></div><details class="more"><summary>More details</summary><div class="detailbody"><address class="addr">The Church of Jesus Christ of Latter-day Saints<br>1625 South Slate Canyon Drive, Provo, UT 84606</address>This is the meetinghouse next to Nevada Avenue and California Avenue.</div></details></div></div></div>
- <div class="item meal"><div class="time">3:00 PM</div><div><strong>Mexican dinner in Provo Canyon — tacos, nachos, and burritos</strong><span class="tag hosted">group meal</span><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Provo+Canyon+Utah" target="_blank" rel="noopener">Provo Canyon on Google Maps</a></div></div></div></div>
+ <div class="item meal"><div class="time">3:00 PM</div><div><strong>Mexican dinner in Provo Canyon — tacos, nachos, and burritos</strong><span class="tag together">eat together</span><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Provo+Canyon+Utah" target="_blank" rel="noopener">Provo Canyon on Google Maps</a></div></div></div></div>
  <div class="item"><div class="time">Afterward</div><div><strong>Crafts and games at camp</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=40.41394%2C-111.50460" target="_blank" rel="noopener">Campground map</a></div></div></div></div>
 </section>
 
 <section class="day" id="mon">
  <div class="dayhead"><h2>Monday</h2><span class="date">August 3</span></div>
- <div class="item meal"><div class="time">Morning</div><div><strong>Breakfast on your own</strong></div></div>
+ <div class="item meal"><div class="time">Morning</div><div><strong>Breakfast</strong><span class="tag own">on your own</span></div></div>
  <div class="item"><div class="time">Before 9</div><div><strong>Pack a lunch to go</strong></div></div>
  <div class="item"><div class="time">9:00 AM</div><div><strong>Hike at Big Springs Park</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=7201+N+South+Fork+Road+Provo+UT+84604" target="_blank" rel="noopener">Big Springs Park on Google Maps</a></div><details class="more"><summary>More details</summary><div class="detailbody"><address class="addr">7201 N South Fork Road, Provo, UT 84604</address></div></details></div></div></div>
- <div class="item meal"><div class="time">Midday</div><div><strong>Picnic lunch at Big Springs Park</strong><span class="tag">on your own</span><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=7201+N+South+Fork+Road+Provo+UT+84604" target="_blank" rel="noopener">Big Springs Park on Google Maps</a></div></div></div></div>
+ <div class="item meal"><div class="time">Midday</div><div><strong>Picnic lunch at Big Springs Park</strong><span class="tag own">on your own</span><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=7201+N+South+Fork+Road+Provo+UT+84604" target="_blank" rel="noopener">Big Springs Park on Google Maps</a></div></div></div></div>
  <div class="item"><div class="time">After lunch</div><div><strong>Self-guided Provo River float</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Lower+Provo+River+Park+Utah" target="_blank" rel="noopener">Put-in map</a><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Vivian+Park+6828+South+Fork+Road+Provo+UT" target="_blank" rel="noopener">Take-out map</a></div><details class="more"><summary>Safety and logistics</summary><div class="detailbody"><strong>Bring your own kayaks, tubes or raft, paddles and properly fitted life jackets.</strong> This is not an outfitter trip, so there is no equipment rental or commercial shuttle included.<br><strong>Put-in:</strong> Lower Provo River Park, immediately below Deer Creek Dam.<br><strong>Take-out:</strong> Vivian Park, <address class="addr" style="display:inline">6828 South Fork Road, Provo, UT 84606</address>.<br>The standard lower-river float is roughly 5–6 miles and commonly takes about 1–1½ hours depending on flow. Stage enough vehicles at Vivian Park before launching, shuttle drivers back to the put-in, and retrieve the put-in vehicles afterward. Lower Provo River Park has a Deer Creek State Park day-use fee.<br><strong>Safety:</strong> Utah requires every person on a river vessel—including an inner tube—to wear a properly sized U.S. Coast Guard-approved life jacket. The water is about 45°F, secure river shoes are strongly recommended, and the angled supports at the Wildwood railroad trestle are the principal obstacle on this stretch. Check the day’s river flow and weather before launching.</div></details></div></div></div>
  <div class="item"><div class="time">Evening</div><div><strong>Pickleball at Southfield Park</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Southfield+Park+Pickleball+Courts+Heber+City+UT" target="_blank" rel="noopener">Southfield Park on Google Maps</a></div><details class="more"><summary>More details</summary><div class="detailbody"><address class="addr">1200 W Midway Lane, Heber City, UT 84032</address>Outdoor dedicated courts; bring paddles and balls.</div></details></div></div></div>
- <div class="item meal"><div class="time">Evening</div><div><strong>BBQ pork sandwich dinner at Great Horned Owl Campground</strong><span class="tag hosted">group meal</span><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=40.41394%2C-111.50460" target="_blank" rel="noopener">Campground map</a></div></div></div></div>
+ <div class="item meal"><div class="time">Evening</div><div><strong>BBQ pork sandwich dinner at Great Horned Owl Campground</strong><span class="tag together">eat together</span><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=40.41394%2C-111.50460" target="_blank" rel="noopener">Campground map</a></div></div></div></div>
 </section>
 
 <section class="day" id="tue">
  <div class="dayhead"><h2>Tuesday</h2><span class="date">August 4</span></div>
- <div class="item meal"><div class="time">Morning</div><div><strong>Breakfast on your own</strong></div></div>
+ <div class="item meal"><div class="time">Morning</div><div><strong>Breakfast</strong><span class="tag own">on your own</span></div></div>
  <div class="item"><div class="time">8:00 AM</div><div><strong>Leave for Provo Recreation Center</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=320+W+500+N+Provo+UT+84601" target="_blank" rel="noopener">Provo Recreation Center on Google Maps</a></div><details class="more"><summary>More details</summary><div class="detailbody"><address class="addr">320 W 500 N, Provo, UT 84601</address><a href="tel:+18018526600">801-852-6600</a></div></details></div></div></div>
  <div class="item"><div class="time">8 AM–lunch</div><div><strong>Basketball, wallyball and pickleball</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=320+W+500+N+Provo+UT+84601" target="_blank" rel="noopener">Provo Recreation Center on Google Maps</a></div><details class="more"><summary>More details</summary><div class="detailbody">The indoor activity pool and lazy river are scheduled to be closed August 3–5 for maintenance. Other aquatic areas may still be available, but confirm at the front desk that morning.</div></details></div></div></div>
- <div class="item meal"><div class="time">Lunch</div><div><strong>Chicken croissant sandwich lunch at North Park — with fruit, cowboy caviar, and chips</strong><span class="tag hosted">group meal</span><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=North+Park+500+N+500+W+Provo+UT" target="_blank" rel="noopener">North Park on Google Maps</a></div><details class="more"><summary>More details</summary><div class="detailbody"><address class="addr">North Park, 500 N 500 W, Provo, UT 84601</address>The park is immediately beside the Recreation Center.</div></details></div></div></div>
+ <div class="item meal"><div class="time">Lunch</div><div><strong>Chicken croissant sandwich lunch at North Park — with fruit, cowboy caviar, and chips</strong><span class="tag together">eat together</span><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=North+Park+500+N+500+W+Provo+UT" target="_blank" rel="noopener">North Park on Google Maps</a></div><details class="more"><summary>More details</summary><div class="detailbody"><address class="addr">North Park, 500 N 500 W, Provo, UT 84601</address>The park is immediately beside the Recreation Center.</div></details></div></div></div>
  <div class="item"><div class="time">After lunch</div><div><strong>Swimming at Provo Recreation Center</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=320+W+500+N+Provo+UT+84601" target="_blank" rel="noopener">Provo Recreation Center on Google Maps</a></div><details class="more"><summary>More details</summary><div class="detailbody">The outdoor pool is scheduled to be open noon–8:00 PM. Confirm which indoor pools are available because of the August 3–5 maintenance closure.</div></details></div></div></div>
  <div class="item"><div class="time">4:00 PM</div><div><strong>Leave for the South Weber Little Buckaroo Rodeo</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=South+Weber+Posse+Grounds+675+E+Old+Fort+Road+South+Weber+UT+84405" target="_blank" rel="noopener">South Weber Posse Grounds on Google Maps</a></div><details class="more"><summary>More details</summary><div class="detailbody"><strong>Rodeo starts at 5:30 PM.</strong><br><address class="addr">South Weber Posse Grounds<br>675 E Old Fort Road (6650 S), South Weber, UT 84405</address><a href="https://southwebercity.gov/country-fair-days/" target="_blank" rel="noopener">Official Country Fair Days page</a><br>Event contact: Alexx Keetch, <a href="tel:+18013891664">801-389-1664</a>. The 2026 local event listing gives a 5:30 PM start; recheck the city flyer before leaving. Anyone participating rather than watching should confirm registration requirements directly.</div></details></div></div></div>
- <div class="item meal"><div class="time">Evening</div><div><strong>Dinner on your own</strong></div></div>
+ <div class="item meal"><div class="time">Evening</div><div><strong>Dinner</strong><span class="tag own">on your own</span></div></div>
 </section>
 
 <section class="day" id="wed">
  <div class="dayhead"><h2>Wednesday</h2><span class="date">August 5</span></div>
- <div class="item meal"><div class="time">Morning</div><div><strong>Breakfast on your own</strong></div></div>
+ <div class="item meal"><div class="time">Morning</div><div><strong>Breakfast</strong><span class="tag own">on your own</span></div></div>
  <div class="item"><div class="time">9:15–10:15 AM</div><div><strong>Timpanogos Cave tours — choose your own ticket time</strong><span class="keypoint">Everyone: get your own ticket. Krystalee, Sierra, Mom &amp; Dad: 9:30 AM — arrive at the cave base by 9:30. Dad: arrive early for his Senior refund.</span><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Timpanogos+Cave+National+Monument" target="_blank" rel="noopener">Timpanogos Cave on Google Maps</a></div><details class="more"><summary>More cave details</summary><div class="detailbody">The ticket time is when the 1.5-mile uphill hike begins; allow at least 3 hours total. Bring at least 1 liter of water per person, closed-toe shoes, and a light jacket for the 43–48°F cave. No strollers or external-frame child carriers.<br><address class="addr">2038 W Alpine Loop Road, American Fork, UT 84003</address></div></details></div></div></div>
- <div class="item meal"><div class="time">Midday</div><div><strong>Lunch on your own</strong></div></div>
+ <div class="item meal"><div class="time">Midday</div><div><strong>Lunch</strong><span class="tag own">on your own</span></div></div>
  <div class="item"><div class="time">Afternoon</div><div><strong>Hang out at camp / lake</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=40.41394%2C-111.50460" target="_blank" rel="noopener">Campground map</a></div></div></div></div>
- <div class="item meal"><div class="time">Evening</div><div><strong>Dinner at Great Horned Owl Campground (possibly at the pickleball court)</strong><span class="tag hosted">group meal</span><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=40.41394%2C-111.50460" target="_blank" rel="noopener">Campground map</a><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Southfield+Park+Pickleball+Courts+Heber+City+UT" target="_blank" rel="noopener">Pickleball court map</a></div></div></div></div>
+ <div class="item meal"><div class="time">Evening</div><div><strong>Dinner at Great Horned Owl Campground (possibly at the pickleball court)</strong><span class="tag together">eat together</span><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=40.41394%2C-111.50460" target="_blank" rel="noopener">Campground map</a><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Southfield+Park+Pickleball+Courts+Heber+City+UT" target="_blank" rel="noopener">Pickleball court map</a></div></div></div></div>
  <div class="item"><div class="time">Evening</div><div><strong>Pickleball at Southfield Park</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Southfield+Park+Pickleball+Courts+Heber+City+UT" target="_blank" rel="noopener">Southfield Park on Google Maps</a></div><details class="more"><summary>More details</summary><div class="detailbody"><address class="addr">1200 W Midway Lane, Heber City, UT 84032</address></div></details></div></div></div>
 </section>
 
 <section class="day" id="thu">
  <div class="dayhead"><h2>Thursday</h2><span class="date">August 6</span></div>
- <div class="item meal"><div class="time">Morning</div><div><strong>Breakfast on your own</strong></div></div>
+ <div class="item meal"><div class="time">Morning</div><div><strong>Breakfast</strong><span class="tag own">on your own</span></div></div>
  <div class="item"><div class="time">Before 10</div><div><strong>Pack a lunch for Splash Summit</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=1330+E+300+N+Provo+UT+84606" target="_blank" rel="noopener">Splash Summit on Google Maps</a></div><details class="more"><summary>More details</summary><div class="detailbody">Outside food cannot be brought inside. The plan is to leave lunch outside, exit to eat, and return; verify same-day re-entry at the gate.</div></details></div></div></div>
  <div class="item"><div class="time">10 AM–5:30 PM</div><div><strong>Splash Summit Waterpark</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=1330+E+300+N+Provo+UT+84606" target="_blank" rel="noopener">Splash Summit on Google Maps</a></div><details class="more"><summary>More details</summary><div class="detailbody"><address class="addr">1330 E 300 N, Provo, UT 84606</address><a href="tel:+13853092388">385-309-2388</a></div></details></div></div></div>
- <div class="item meal"><div class="time">Evening</div><div><strong>Dinner and dance at the Montana Avenue backyard</strong><span class="tag hosted">group meal</span><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=1973+Montana+Avenue+Provo+UT+84606" target="_blank" rel="noopener">Montana Avenue backyard on Google Maps</a></div><details class="more"><summary>More details</summary><div class="detailbody"><address class="addr">1973 Montana Avenue, Provo, UT 84606</address></div></details></div></div></div>
+ <div class="item meal"><div class="time">Evening</div><div><strong>Dinner and dance at the Montana Avenue backyard</strong><span class="tag together">eat together</span><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=1973+Montana+Avenue+Provo+UT+84606" target="_blank" rel="noopener">Montana Avenue backyard on Google Maps</a></div><details class="more"><summary>More details</summary><div class="detailbody"><address class="addr">1973 Montana Avenue, Provo, UT 84606</address></div></details></div></div></div>
 </section>
 
 <section class="day" id="fri">
  <div class="dayhead"><h2>Friday</h2><span class="date">August 7</span></div>
  <div class="item"><div class="time">All day</div><div><strong>Camp / lake day</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=40.41394%2C-111.50460" target="_blank" rel="noopener">Campground map</a></div></div></div></div>
- <div class="item meal"><div class="time">Morning &amp; noon</div><div><strong>Breakfast and lunch on your own</strong></div></div>
- <div class="item meal"><div class="time">Evening</div><div><strong>Dinner at Great Horned Owl Campground</strong><span class="tag hosted">group meal</span><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=40.41394%2C-111.50460" target="_blank" rel="noopener">Campground map</a></div></div></div></div>
+ <div class="item meal"><div class="time">Morning &amp; noon</div><div><strong>Breakfast and lunch</strong><span class="tag own">on your own</span></div></div>
+ <div class="item meal"><div class="time">Evening</div><div><strong>Dinner at Great Horned Owl Campground</strong><span class="tag together">eat together</span><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=40.41394%2C-111.50460" target="_blank" rel="noopener">Campground map</a></div></div></div></div>
 </section>
 
 <section class="day" id="sat2">
@@ -155,14 +165,19 @@ label small{display:block;font-weight:400;color:var(--muted)}
  <div class="dayhead"><h2>Bring along</h2></div>
  <div class="checklist">
   <label><input type="checkbox"> Monday sack lunch</label>
-  <label><input type="checkbox"> River craft: kayaks, tubes or raft</label>
-  <label><input type="checkbox"> Paddles, river shoes and USCG-approved PFDs for everyone</label>
+  <label><input type="checkbox"> River craft: paddle boards, kayaks, tubes or raft</label>
+  <label><input type="checkbox"> Paddles, river shoes and USCG-approved life jackets/PFDs for everyone</label>
   <label><input type="checkbox"> River shuttle vehicles and assigned drivers</label>
   <label><input type="checkbox"> Swimsuits, towels and water shoes</label>
   <label><input type="checkbox"> Pickleball paddles and balls</label>
   <label><input type="checkbox"> Hiking shoes and 1 L water/person</label>
   <label><input type="checkbox"> Light jackets for the cave</label>
   <label><input type="checkbox"> Thursday sack lunch / cooler</label>
+  <label><input type="checkbox"> Shade canopies or umbrellas</label>
+  <label><input type="checkbox"> Camp stove and large pot, if you have one, for spaghetti</label>
+  <label><input type="checkbox"> Sunscreen</label>
+  <label><input type="checkbox"> Camp chairs</label>
+  <label><input type="checkbox"> Supplies for activities you’re in charge of</label>
  </div>
 </section>
 
@@ -170,13 +185,11 @@ label small{display:block;font-weight:400;color:var(--muted)}
  <div class="dayhead"><h2>Still to confirm</h2></div>
  <ul>
   <li>Exact campsite site numbers.</li>
-  <li>Saturday’s meeting time at South Fork Park.</li>
-  <li>Vehicle shuttle assignments for Monday’s self-guided Provo River float.</li>
-  <li>Wednesday dinner location: the campground or the pickleball court.</li>
-  <li>Which Provo Recreation Center pools will be available Tuesday.</li>
-  <li>Whether Splash Summit allows same-day re-entry after leaving for lunch.</li>
-  <li>Rodeo participation registration requirements, if anyone wants to participate.</li>
-  <li>Saturday evening’s location for Madeline’s baby blessing.</li>
+ <li>Saturday’s meeting time at South Fork Park.</li>
+ <li>Wednesday dinner location: the campground or the pickleball court.</li>
+ <li>Which Provo Recreation Center pools will be available Tuesday.</li>
+ <li>Whether Splash Summit allows same-day re-entry after leaving for lunch.</li>
+ <li>Saturday evening’s location for Madeline’s baby blessing.</li>
  </ul>
 </section>
 
