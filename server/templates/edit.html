@@ -47,7 +47,7 @@ let busy=false;
 
 function setStatus(text,error=false){statusEl.textContent=text;statusEl.style.color=error?'#a12828':'#225a4d'}
 function doc(){return frame.contentDocument}
-function isLocked(el){return Boolean(el && (el.id==='rsvp'||el.closest('#rsvp')||el.matches('header,footer')||el.closest('header,footer')))}
+function isLocked(el){return Boolean(el && (el.matches('header,footer')||el.closest('header,footer')))}
 function describe(el){if(!el)return 'Nothing selected';if(el.classList.contains('item'))return 'Event: '+(el.querySelector('strong')?.textContent.trim()||'untitled');if(el.classList.contains('day'))return 'Section: '+(el.querySelector('h2')?.textContent.trim()||'untitled');return el.tagName.toLowerCase()}
 function selectBlock(el){
   const d=doc();
@@ -62,14 +62,13 @@ function addEditorStyles(d){
  [contenteditable="true"]:hover{outline-color:#7fa89c;background:#f4faf7}
  [contenteditable="true"]:focus{outline:2px solid #2a7a65;background:#fff}
  .reunion-editor-selected{outline:3px solid #d38b21!important;outline-offset:3px}
- #rsvp{position:relative}.reunion-editor-locked{opacity:.98}.reunion-editor-locked:before{content:"Managed RSVP section";display:inline-block;background:#5f6b66;color:#fff;font-size:11px;padding:2px 6px;border-radius:5px;margin-bottom:6px}
+ .reunion-editor-locked{opacity:.98}
  `;d.head.appendChild(style);
 }
 function enableEditing(){
  const d=doc();if(!d)return;
  addEditorStyles(d);
- d.getElementById('rsvp')?.classList.add('reunion-editor-locked');
- const selectors=['header h1','header .subtitle','header .updated','.notice','.day:not(#rsvp) h2','.day:not(#rsvp) .date','.day:not(#rsvp) .item .time','.day:not(#rsvp) .item > div:nth-child(2)','.day:not(#rsvp) .transcription'];
+ const selectors=['header h1','header .subtitle','header .updated','.notice','.day h2','.day .date','.day .item .time','.day .item > div:nth-child(2)','.day .transcription'];
  d.querySelectorAll(selectors.join(',')).forEach(el=>{el.contentEditable='true';el.spellcheck=true});
  d.addEventListener('click',event=>{
    const target=event.target;

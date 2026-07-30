@@ -4,7 +4,8 @@ Itinerary and meal-RSVP site for the Hazard family reunion, August 1–8, 2026.
 
 ## Public site
 
-- `index.html` — mobile-friendly itinerary, maps, safety notes, and RSVP fallback builder.
+- `index.html` — mobile-friendly itinerary, maps, and safety notes.
+- `rsvp/index.html` — meal RSVP instructions, live Google Form link, and personal backup builder.
 - `config.js` — public runtime configuration and the small `/edit` / `/admin` footer links.
 - `create_hazard_rsvp_form.gs` — creates the household meal RSVP form, response spreadsheet, and live per-meal headcounts.
 - `deploy/deploy.sh` — copies only public static files into the Nginx document root.
@@ -15,7 +16,8 @@ Production URL: `https://taylorarchibald.com/reunion/`
 
 The repository also contains a small Flask service for:
 
-- `/reunion/edit` — in-place visual editing of the rendered page. Text can be edited directly; itinerary sections and events can be added, moved, or deleted. The managed RSVP section is protected from structural edits.
+- `/reunion/rsvp/` — meal RSVP page with the live Google Form and estimate-only backup builder.
+- `/reunion/edit` — in-place visual editing of the rendered itinerary. Text can be edited directly; itinerary sections and events can be added, moved, or deleted.
 - `/reunion/admin` — a chat-only shell for a persistent Codex session scoped to this repository.
 - `/reunion/api/` — authenticated document, publish, audit, and Codex-turn endpoints.
 
@@ -56,7 +58,7 @@ Use `deploy/reunion-admin.service.example` as the unit template. Keep the enviro
 The editor:
 
 1. checks that the dedicated checkout is clean and still on `master`;
-2. validates that required RSVP controls and Hazard branding remain intact;
+2. validates Hazard branding and rejects unsafe markup and URLs;
 3. creates a private backup;
 4. writes `index.html` atomically;
 5. runs `deploy/publish.sh`, which fetches `origin/master`, commits the page change directly to `master`, pushes it, and deploys the static site.
@@ -79,8 +81,7 @@ The organizer can review submitted meal counts from the SSO-protected Admin chat
 
 ## Meal RSVP form
 
-1. Open `https://script.new` in the Google account that should own the responses.
-2. Paste `create_hazard_rsvp_form.gs` into the editor.
-3. Run `createHazardMealRsvp` and authorize Forms and Sheets access.
-4. Copy the logged `window.REUNION_CONFIG = ...` line into `config.js`.
-5. Commit the updated `config.js` and redeploy. The form URL is public and is not a secret.
+1. Open `https://script.new` in the Google account that owns the existing form.
+2. Paste `create_hazard_rsvp_form.gs` into the editor and run `updateHazardMealRsvp` to rebuild the existing form with one estimate-only 0–12 portion field plus six meal attendance choices.
+3. The form’s `Meal Totals` sheet sums estimated adult-sized portions for attending households. These are planning numbers, not a food guarantee.
+4. The public form URL belongs in `config.js`; keep the response-spreadsheet URL in the host-only `REUNION_RSVP_RESULTS_URL` environment variable so the Admin page can review results privately.

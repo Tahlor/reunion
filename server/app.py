@@ -27,17 +27,6 @@ DEFAULT_PORT = 13041
 MAX_DOCUMENT_BYTES = 1_000_000
 MAX_PROMPT_CHARS = 20_000
 MAX_CODEX_OUTPUT_CHARS = 120_000
-REQUIRED_IDS = {
-    "rsvp",
-    "rsvp-builder",
-    "liveRsvpPending",
-    "liveRsvpReady",
-    "liveRsvpLink",
-    "formBlueprint",
-    "rsvpOutput",
-    "rsvpStatus",
-    "emailRsvp",
-}
 DANGEROUS_TAGS = {"script", "style", "iframe", "object", "embed", "base", "meta", "link"}
 DANGEROUS_URL_SCHEMES = ("javascript:", "data:", "vbscript:")
 SAFE_INLINE_HANDLERS = {"buildRsvp()", "copyRsvp()", "shareRsvp()", "copyBlueprint()"}
@@ -446,11 +435,6 @@ def clean_and_validate_fragment(fragment: str) -> str:
             tag["class"] = [item for item in classes if item not in {"reunion-editor-selected", "reunion-editor-hover"}]
             if not tag["class"]:
                 del tag["class"]
-
-    ids = {str(tag.get("id")) for tag in soup.find_all(attrs={"id": True})}
-    missing = sorted(REQUIRED_IDS - ids)
-    if missing:
-        raise ValueError("The edit removed required page controls: " + ", ".join(missing))
 
     plain_text = soup.get_text(" ", strip=True)
     if "Hazard Family Reunion" not in plain_text:

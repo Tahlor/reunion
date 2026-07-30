@@ -6,6 +6,10 @@ location = /reunion {
     return 301 /reunion/;
 }
 
+location = /reunion/rsvp {
+    return 301 /reunion/rsvp/;
+}
+
 location = /reunion/edit {
     proxy_pass http://127.0.0.1:13041;
     include proxy_params;

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hazard Family Reunion — Meal RSVP</title>
+<style>
+:root{--ink:#1f2937;--muted:#667085;--paper:#fffdf8;--page:#edf2ef;--accent:#315f52;--accent2:#e8f1ed;--line:#d8dedb;--meal:#7c3f58;--mealbg:#f7edf1;--button:#225a4d;--blue:#185c8c}
+*{box-sizing:border-box}body{margin:0;background:var(--page);color:var(--ink);font:16px/1.52 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}main{max-width:860px;margin:0 auto;background:var(--paper);min-height:100vh;padding:28px 30px 58px;box-shadow:0 0 35px #18261f18}h1{margin:.2rem 0 .35rem;font:800 clamp(2rem,5vw,3.1rem)/1.03 Georgia,serif;color:#24483f}h2{font:750 1.35rem/1.2 Georgia,serif;color:#24483f;margin:0}.eyebrow{color:var(--muted);font-size:.96rem}.toplink{display:inline-block;margin-bottom:22px;color:var(--blue);font-weight:700}.card{border:1px solid var(--line);background:#f7f9f7;border-radius:10px;padding:17px;margin:18px 0}.meal-card{background:var(--mealbg);border-color:#e4cbd5}.notice{background:#fff4d6;border-left:5px solid #d8a51d;padding:13px 16px;border-radius:6px}.button{display:inline-block;border:0;border-radius:7px;padding:9px 12px;background:var(--button);color:#fff;text-decoration:none;font-weight:700;cursor:pointer;font:inherit}.button.secondary{background:#e7ecea;color:#24483f}label{font-weight:650}label small{display:block;font-weight:400;color:var(--muted)}input,textarea,select{width:100%;font:inherit;padding:8px 9px;border:1px solid #bdc7c3;border-radius:6px;background:#fff;color:var(--ink)}textarea{min-height:90px;resize:vertical}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.meal-row{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:12px;align-items:center;padding:11px 0;border-top:1px solid #e3d5db}.meal-row:first-child{border-top:0}.meal-name{color:var(--meal);font-weight:700}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}.output{white-space:pre-wrap;background:#fff;border:1px solid var(--line);border-radius:7px;padding:12px;margin-top:12px;min-height:78px}.status{margin-top:8px;color:var(--accent);font-weight:650}.caution{color:#694d00;font-size:.93rem}.footer{font-size:.88rem;color:var(--muted);margin-top:34px;border-top:1px solid var(--line);padding-top:16px}.footer a{color:inherit}@media(max-width:640px){main{padding:22px 17px}.grid2{grid-template-columns:1fr}.meal-row{grid-template-columns:1fr}.meal-row select{max-width:none}}
+</style>
+</head>
+<body><main>
+<a class="toplink" href="/reunion/">← Back to the reunion itinerary</a>
+<div class="eyebrow">Hazard Family Reunion · August 1–8, 2026</div>
+<h1>Meal RSVP</h1>
+<p>Please submit one response per household. Give one rough estimate of your household’s total adult-sized portions, then mark which group meals you expect to attend.</p>
+<div class="notice"><strong>Planning estimate only:</strong> this is not a reservation, promise, or food guarantee. Count adult-sized portions however seems reasonable for the people you know will attend. As a simple ceiling, the form allows up to 12 portions per household, roughly 2 adults plus 10 children.</div>
+
+<section class="card meal-card">
+ <h2>Shared Google Form</h2>
+ <p id="liveRsvpPending" class="caution">The shared form link has not been configured yet.</p>
+ <p id="liveRsvpReady" hidden><a class="button" id="liveRsvpLink" href="#" target="_blank" rel="noopener">Open the Hazard reunion meal RSVP</a></p>
+ <p class="caution">The form asks for one estimated portion total and six meal attendance choices. You can edit your response later if plans change.</p>
+</section>
+
+<section id="rsvp-builder" class="card">
+ <h2>Personal backup RSVP builder</h2>
+ <p class="caution">This prepares a text or email message; it does not submit to the shared response sheet.</p>
+ <div class="grid2">
+  <div><label for="household">Family / household name</label><input id="household" placeholder="e.g., Taylor &amp; family"></div>
+  <div><label for="contact">Contact phone or email <small>Optional</small></label><input id="contact" placeholder="Phone or email"></div>
+  <div><label for="portions">Estimated adult-sized portions <small>0–12; planning estimate only</small></label><input id="portions" type="number" min="0" max="12" value="0"></div>
+  <div><label for="diet">Dietary restrictions or meal notes <small>Optional</small></label><input id="diet" placeholder="Allergies, vegetarian needs, etc."></div>
+ </div>
+ <div style="margin-top:15px">
+  <div class="meal-row"><div class="meal-name">Sunday, Aug. 2 — 3:00 PM lunch/dinner at camp</div><select id="meal1"><option>Attending</option><option>Not attending</option></select></div>
+  <div class="meal-row"><div class="meal-name">Monday, Aug. 3 — dinner at camp</div><select id="meal2"><option>Attending</option><option>Not attending</option></select></div>
+  <div class="meal-row"><div class="meal-name">Tuesday, Aug. 4 — lunch at North Park</div><select id="meal3"><option>Attending</option><option>Not attending</option></select></div>
+  <div class="meal-row"><div class="meal-name">Wednesday, Aug. 5 — dinner at camp</div><select id="meal4"><option>Attending</option><option>Not attending</option></select></div>
+  <div class="meal-row"><div class="meal-name">Thursday, Aug. 6 — dinner and dance at the backyard</div><select id="meal5"><option>Attending</option><option>Not attending</option></select></div>
+  <div class="meal-row"><div class="meal-name">Friday, Aug. 7 — dinner at camp</div><select id="meal6"><option>Attending</option><option>Not attending</option></select></div>
+ </div>
+ <div class="actions"><button class="button" type="button" onclick="buildRsvp()">Prepare RSVP</button><button class="button secondary" type="button" onclick="copyRsvp()">Copy RSVP</button><button class="button secondary" type="button" onclick="shareRsvp()">Share / text RSVP</button><a class="button secondary" id="emailRsvp" href="#">Email RSVP</a></div>
+ <div id="rsvpOutput" class="output">Fill in your estimate, then choose “Prepare RSVP.”</div>
+ <div id="rsvpStatus" class="status" aria-live="polite"></div>
+</section>
+
+<details class="card">
+ <summary><strong>Organizer setup and totals</strong></summary>
+ <p>The form’s <strong>Meal Totals</strong> sheet sums estimated adult-sized portions only for households marked as attending each meal. Those numbers are for planning and shopping, not a guarantee of servings.</p>
+ <ol>
+  <li>Open <a href="https://script.new" target="_blank" rel="noopener">script.new</a> in the owning Google account.</li>
+  <li>Paste <a href="../create_hazard_rsvp_form.gs">create_hazard_rsvp_form.gs</a> into Apps Script.</li>
+  <li>Use <code>updateHazardMealRsvp</code> for the existing form, or <code>createHazardMealRsvp</code> for a new one.</li>
+ </ol>
+</details>
+
+<footer class="footer"><a href="/reunion/">Itinerary</a> · <a href="/reunion/edit">Edit this page</a> · <a href="/reunion/admin">Admin chat</a></footer>
+</main>
+<script src="../config.js"></script>
+<script>
+const liveRsvpUrl=typeof window.REUNION_CONFIG?.rsvpFormUrl==='string'?window.REUNION_CONFIG.rsvpFormUrl.trim():'';
+if(liveRsvpUrl){document.getElementById('liveRsvpLink').href=liveRsvpUrl;document.getElementById('liveRsvpReady').hidden=false;document.getElementById('liveRsvpPending').hidden=true;}
+const meals=[['Sunday Aug. 2, 3:00 PM lunch/dinner at camp','meal1'],['Monday Aug. 3 dinner at camp','meal2'],['Tuesday Aug. 4 lunch at North Park','meal3'],['Wednesday Aug. 5 dinner at camp','meal4'],['Thursday Aug. 6 dinner and dance at the backyard','meal5'],['Friday Aug. 7 dinner at camp','meal6']];
+function buildRsvp(){const household=document.getElementById('household').value.trim()||'[Household name]';const contact=document.getElementById('contact').value.trim();const portions=Math.max(0,Math.min(12,parseInt(document.getElementById('portions').value,10)||0));const diet=document.getElementById('diet').value.trim();let lines=['HAZARD FAMILY REUNION — MEAL RSVP','Household: '+household,'Estimated adult-sized portions: '+portions,'(Planning estimate only; not a food guarantee.)'];if(contact)lines.push('Contact: '+contact);lines.push('');meals.forEach(([name,id])=>lines.push(name+': '+document.getElementById(id).value));lines.push('','Dietary restrictions / notes: '+(diet||'None'));const text=lines.join('\n');document.getElementById('rsvpOutput').textContent=text;document.getElementById('emailRsvp').href='mailto:?subject='+encodeURIComponent('Hazard Family Reunion meal RSVP — '+household)+'&body='+encodeURIComponent(text);document.getElementById('rsvpStatus').textContent='RSVP prepared.';return text;}
+async function copyRsvp(){const text=buildRsvp();try{await navigator.clipboard.writeText(text);document.getElementById('rsvpStatus').textContent='RSVP copied to the clipboard.';}catch(e){document.getElementById('rsvpStatus').textContent='Copy was blocked. Select the prepared RSVP text and copy it manually.';}}
+async function shareRsvp(){const text=buildRsvp();if(navigator.share){try{await navigator.share({title:'Hazard Family Reunion meal RSVP',text});document.getElementById('rsvpStatus').textContent='RSVP shared.';return;}catch(e){if(e.name==='AbortError')return;}}await copyRsvp();}
+buildRsvp();
+</script>
+</body></html>

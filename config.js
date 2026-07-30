@@ -1,7 +1,6 @@
 // Public, non-secret configuration for the Hazard reunion site.
-// The Archimedes setup agent will replace the empty string after creating the form.
 window.REUNION_CONFIG = {
-  rsvpFormUrl: ''
+  rsvpFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSecJufXG9xkJcm1XU42xkS6POYb6eIS4GHTvy77bd_KBOfbGw/viewform'
 };
 
 // The destinations are SSO-protected. The links can be public because access is
@@ -13,6 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const links = document.createElement('div');
   links.id = 'reunionAdminLinks';
   links.style.cssText = 'margin-top:14px;font-size:.84rem;opacity:.78';
-  links.innerHTML = '<a href="/reunion/edit">Edit this page</a> · <a href="/reunion/admin">Admin chat</a>';
+  links.innerHTML = '<a href="/reunion/rsvp/">Meal RSVP</a> · <a href="/reunion/edit">Edit this page</a> · <a href="/reunion/admin">Admin chat</a>';
   footer.appendChild(links);
 });
