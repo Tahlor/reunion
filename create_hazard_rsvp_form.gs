@@ -13,10 +13,10 @@ const EXISTING_FORM_ID = '1EeX2uRSJ2j9hLviIvzmF2GGObHn8Zrkfes_2t2P1XwQ';
 const EXISTING_SPREADSHEET_ID = '19hImuDxS-7aYMUJw8jqrmwzovslg2vWw21evmaBE2Lg';
 const FORM_TITLE = 'Hazard Family Reunion — Group Meal RSVP';
 const MEALS = [
-  'Sunday, Aug. 2 — 3:00 PM lunch/dinner at Great Horned Owl Campground',
-  'Monday, Aug. 3 — dinner at Great Horned Owl Campground',
-  'Tuesday, Aug. 4 — lunch at North Park by the Provo Recreation Center',
-  'Wednesday, Aug. 5 — dinner at Great Horned Owl Campground',
+  'Sunday, Aug. 2 — 3:00 PM Provo Canyon - Mexican - Tacos, Nachos, Burritos',
+  'Monday, Aug. 3 — dinner at Great Horned Owl Campground - BBQ Pork Sandwiches',
+  'Tuesday, Aug. 4 — lunch at North Park by the Provo Recreation Center -- Chicken croissant sandwiches with fruit/cowboy caviar/ chips',
+  'Wednesday, Aug. 5 — dinner at Great Horned Owl Campground (or possibly the pickleball court)',
   'Thursday, Aug. 6 — dinner and dance at the Montana Avenue backyard',
   'Friday, Aug. 7 — dinner at Great Horned Owl Campground'
 ];
@@ -131,12 +131,12 @@ function configureTotals(spreadsheet, responseSheet, form) {
   const responseTab = responseSheet.getName().replace(/'/g, "''");
   const responseRef = "'" + responseTab + "'!";
   const mealRows = [
-    ['Sunday camp lunch/dinner', 'E'],
-    ['Monday camp dinner', 'F'],
-    ['Tuesday North Park lunch', 'G'],
-    ['Wednesday camp dinner', 'H'],
-    ['Thursday backyard dinner', 'I'],
-    ['Friday camp dinner', 'J']
+    [MEALS[0], 'E'],
+    [MEALS[1], 'F'],
+    [MEALS[2], 'G'],
+    [MEALS[3], 'H'],
+    [MEALS[4], 'I'],
+    [MEALS[5], 'J']
   ];
 
   totalsSheet.getRange('A1:C7').setValues([
