@@ -27,9 +27,29 @@ DEFAULT_PORT = 13041
 MAX_DOCUMENT_BYTES = 1_000_000
 MAX_PROMPT_CHARS = 20_000
 MAX_CODEX_OUTPUT_CHARS = 120_000
+MAX_CODEX_ERROR_CHARS = 4_000
 DANGEROUS_TAGS = {"script", "style", "iframe", "object", "embed", "base", "meta", "link"}
 DANGEROUS_URL_SCHEMES = ("javascript:", "data:", "vbscript:")
 SAFE_INLINE_HANDLERS = {"buildRsvp()", "copyRsvp()", "shareRsvp()", "copyBlueprint()"}
+CODEX_AUTH_ERROR_MARKERS = (
+    "401 unauthorized",
+    "auth error",
+    "provided authentication token is expired",
+    "refresh_token_reused",
+    "access token could not be refreshed",
+    "please sign in again",
+    "please try signing in again",
+    "token_expired",
+)
+CODEX_AUTH_ERROR_MESSAGE = (
+    "The Codex runner's authentication has expired or was rejected. "
+    "Re-authenticate the private Codex session on Archimedes, then retry this turn."
+)
+CODEX_SECRET_PATTERNS = (
+    (re.compile(r"(?i)(authorization\s*[:=]\s*bearer\s+)[^\s,]+"), r"\1[redacted]"),
+    (re.compile(r"(?i)\bbearer\s+[A-Za-z0-9._~+/=-]+"), "Bearer [redacted]"),
+    (re.compile(r"\bsk-[A-Za-z0-9_-]{16,}\b"), "[redacted credential]"),
+)
 
 
 @dataclass(frozen=True)
@@ -247,7 +267,7 @@ def register_routes(app: Flask) -> None:
     @app.get(f"{URL_PREFIX}/api/codex/turns")
     @require_admin
     def codex_turns_api() -> Response:
-        return jsonify({"turns": read_turns()})
+        return jsonify({"turns": turns_for_client()})
 
     @app.post(f"{URL_PREFIX}/api/codex/turns")
     @require_admin
@@ -615,6 +635,33 @@ def configured_codex_runner() -> Path | None:
     return path if path.is_file() and os.access(path, os.X_OK) else None
 
 
+def is_codex_auth_error(value: str) -> bool:
+    lowered = str(value or "").lower()
+    return any(marker in lowered for marker in CODEX_AUTH_ERROR_MARKERS)
+
+
+def format_codex_error(value: str) -> str:
+    message = str(value or "").strip()
+    if not message:
+        return ""
+    for pattern, replacement in CODEX_SECRET_PATTERNS:
+        message = pattern.sub(replacement, message)
+    if is_codex_auth_error(message):
+        return CODEX_AUTH_ERROR_MESSAGE
+    if len(message) <= MAX_CODEX_ERROR_CHARS:
+        return message
+    return message[:MAX_CODEX_ERROR_CHARS].rstrip() + "\n[Codex error output truncated.]"
+
+
+def turns_for_client() -> list[dict[str, Any]]:
+    turns = []
+    for turn in read_turns():
+        client_turn = dict(turn)
+        client_turn["error"] = format_codex_error(str(turn.get("error") or ""))
+        turns.append(client_turn)
+    return turns
+
+
 def run_codex_turn(app: Flask, turn_id: str, prompt: str, actor: str) -> None:
     with app.app_context():
         with _CODEX_LOCK:
@@ -641,13 +688,23 @@ def run_codex_turn(app: Flask, turn_id: str, prompt: str, actor: str) -> None:
                     timeout=int(current_app.config["CODEX_TIMEOUT_SECONDS"]),
                     check=False,
                 )
-                stdout = (result.stdout or "")[-MAX_CODEX_OUTPUT_CHARS:]
-                stderr = (result.stderr or "")[-20_000:]
+                raw_stdout = result.stdout or ""
+                raw_stderr = result.stderr or ""
+                stdout = raw_stdout[-MAX_CODEX_OUTPUT_CHARS:]
+                stderr = raw_stderr[-20_000:]
                 if result.returncode == 0:
-                    update_turn(turn_id, status="completed", completed_at=int(time.time()), response=stdout.strip(), error=stderr.strip())
+                    update_turn(turn_id, status="completed", completed_at=int(time.time()), response=stdout.strip(), error="")
                     audit_event("codex_turn_completed", actor, {"turn_id": turn_id})
                 else:
-                    update_turn(turn_id, status="failed", completed_at=int(time.time()), response=stdout.strip(), error=(stderr or stdout).strip())
+                    failure_output = (stderr or stdout).strip()
+                    auth_error = is_codex_auth_error((raw_stderr or raw_stdout).strip())
+                    update_turn(
+                        turn_id,
+                        status="failed",
+                        completed_at=int(time.time()),
+                        response="" if auth_error else stdout.strip(),
+                        error=CODEX_AUTH_ERROR_MESSAGE if auth_error else format_codex_error(failure_output),
+                    )
                     audit_event("codex_turn_failed", actor, {"turn_id": turn_id, "returncode": result.returncode})
             except subprocess.TimeoutExpired:
                 update_turn(turn_id, status="failed", completed_at=int(time.time()), error="Codex turn timed out.")
