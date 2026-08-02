@@ -1,2 +1,3 @@
 Fetch live Provo QuickScores schedules on 2026-08-02.
 Retry trigger after workflow registration.
+Trigger workflow that commits output.
