@@ -4,50 +4,431 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hazard Family Reunion — Meal RSVP</title>
+<meta name="description" content="RSVP for shared group meals at the Hazard Family Reunion, August 1–8, 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#1f2937;--muted:#667085;--paper:#fffdf8;--page:#edf2ef;--accent:#315f52;--accent2:#e8f1ed;--line:#d8dedb;--meal:#7c3f58;--mealbg:#f7edf1;--button:#225a4d;--blue:#185c8c}
-*{box-sizing:border-box}body{margin:0;background:var(--page);color:var(--ink);font:16px/1.52 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}main{max-width:860px;margin:0 auto;background:var(--paper);min-height:100vh;padding:28px 30px 58px;box-shadow:0 0 35px #18261f18}h1{margin:.2rem 0 .35rem;font:800 clamp(2rem,5vw,3.1rem)/1.03 Georgia,serif;color:#24483f}h2{font:750 1.35rem/1.2 Georgia,serif;color:#24483f;margin:0}.eyebrow{color:var(--muted);font-size:.96rem}.toplink{display:inline-block;margin-bottom:22px;color:var(--blue);font-weight:700}.card{border:1px solid var(--line);background:#f7f9f7;border-radius:10px;padding:17px;margin:18px 0}.meal-card{background:var(--mealbg);border-color:#e4cbd5}.notice{background:#fff4d6;border-left:5px solid #d8a51d;padding:13px 16px;border-radius:6px}.button{display:inline-block;border:0;border-radius:7px;padding:9px 12px;background:var(--button);color:#fff;text-decoration:none;font-weight:700;cursor:pointer;font:inherit}.button.secondary{background:#e7ecea;color:#24483f}label{font-weight:650}label small{display:block;font-weight:400;color:var(--muted)}input,textarea,select{width:100%;font:inherit;padding:8px 9px;border:1px solid #bdc7c3;border-radius:6px;background:#fff;color:var(--ink)}textarea{min-height:90px;resize:vertical}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.meal-row{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:12px;align-items:center;padding:11px 0;border-top:1px solid #e3d5db}.meal-row:first-child{border-top:0}.meal-name{color:var(--meal);font-weight:700}.meal-map{display:block;margin-top:3px;font-size:.87rem;font-weight:600;color:var(--blue)}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}.output{white-space:pre-wrap;background:#fff;border:1px solid var(--line);border-radius:7px;padding:12px;margin-top:12px;min-height:78px}.status{margin-top:8px;color:var(--accent);font-weight:650}.caution{color:#694d00;font-size:.93rem}.footer{font-size:.88rem;color:var(--muted);margin-top:34px;border-top:1px solid var(--line);padding-top:16px}.footer a{color:inherit}@media(max-width:640px){main{padding:22px 17px}.grid2{grid-template-columns:1fr}.meal-row{grid-template-columns:1fr}.meal-row select{max-width:none}}
+/* ── Design tokens ─────────────────────────────────────── */
+:root {
+  --ink: #1c2b26;
+  --muted: #5c706a;
+  --paper: #fffdf8;
+  --page: #eee8da;
+  --forest: #1e4037;
+  --forest2: #2d5e4e;
+  --accent: #3a7260;
+  --sage: #e4f0e8;
+  --sage2: #d0e6d7;
+  --line: #d5ddd5;
+  --meal: #7c3f58;
+  --mealbg: #f8eef2;
+  --mealline: #e8d0da;
+  --button: #1e4037;
+  --coral: #c96748;
+  --blue: #1a5c92;
+  --bluebg: #e8f1fa;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --shadow-sm: 0 2px 8px rgba(30,64,55,.07);
+  --shadow-md: 0 6px 20px rgba(30,64,55,.1);
+  --transition: 0.18s ease;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--page);
+  background-image:
+    radial-gradient(ellipse 70% 50% at 5% 0%, #e8f4ec 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 95% 100%, #e4d8c8 0%, transparent 50%);
+  color: var(--ink);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+main {
+  max-width: 880px;
+  margin: 0 auto;
+  background: var(--paper);
+  min-height: 100vh;
+  padding: 32px 34px 64px;
+  box-shadow: 0 0 60px rgba(24,38,31,.12), 0 0 0 1px rgba(30,64,55,.04);
+}
+
+/* ── Back link ─────────────────────────────────────────── */
+.toplink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 24px;
+  color: var(--blue);
+  font-weight: 600;
+  font-size: .92rem;
+  text-decoration: none;
+  border: 1px solid var(--bluebg);
+  background: var(--bluebg);
+  padding: 7px 14px;
+  border-radius: 999px;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.toplink:hover {
+  background: #d0e5f5;
+  transform: translateX(-2px);
+}
+
+/* ── Page header ───────────────────────────────────────── */
+.eyebrow {
+  color: var(--muted);
+  font-size: .85rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+h1 {
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  color: var(--forest);
+  margin: .1rem 0 .4rem;
+}
+
+h2 {
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 600;
+  font-size: 1.3rem;
+  line-height: 1.2;
+  color: var(--forest);
+  margin: 0;
+}
+
+a { color: var(--blue); text-underline-offset: 2px; }
+
+/* ── Notice / callout ──────────────────────────────────── */
+.notice {
+  background: #fff9e6;
+  border: 1px solid #edd87a;
+  border-left: 4px solid #d4a820;
+  padding: 13px 16px;
+  border-radius: var(--radius-sm);
+  font-size: .93rem;
+  line-height: 1.5;
+  margin: 16px 0;
+}
+
+.notice strong { color: #6a4808; }
+
+/* ── Cards ─────────────────────────────────────────────── */
+.card {
+  border: 1px solid var(--line);
+  background: #f6f8f5;
+  border-radius: var(--radius-md);
+  padding: 22px;
+  margin: 20px 0;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition);
+}
+
+.card:hover { box-shadow: var(--shadow-md); }
+
+.meal-card {
+  background: var(--mealbg);
+  border-color: var(--mealline);
+}
+
+details.card > summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--forest);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+details.card > summary::-webkit-details-marker { display: none; }
+
+details.card > summary::before {
+  content: '▶';
+  font-size: .65em;
+  color: var(--muted);
+  transition: transform .2s ease;
+}
+
+details.card[open] > summary::before { transform: rotate(90deg); }
+
+/* ── Buttons ───────────────────────────────────────────── */
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 20px;
+  background: var(--button);
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: .9rem;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(30,64,55,.25);
+}
+
+.button:active { transform: translateY(0); }
+
+.button.primary {
+  background: var(--coral);
+  box-shadow: 0 3px 10px rgba(201,103,72,.25);
+}
+
+.button.primary:hover {
+  background: #b85d3f;
+  box-shadow: 0 5px 16px rgba(201,103,72,.35);
+}
+
+.button.secondary {
+  background: #edf0ed;
+  color: var(--forest);
+  border: 1px solid var(--line);
+}
+
+.button.secondary:hover {
+  background: var(--sage);
+  border-color: var(--sage2);
+  box-shadow: 0 2px 8px rgba(30,64,55,.1);
+}
+
+/* ── Form controls ─────────────────────────────────────── */
+label {
+  font-weight: 600;
+  font-size: .93rem;
+  display: block;
+  margin-bottom: 4px;
+}
+
+label small {
+  display: block;
+  font-weight: 400;
+  color: var(--muted);
+  font-size: .85rem;
+  margin-top: 2px;
+}
+
+input, textarea, select {
+  width: 100%;
+  font: inherit;
+  padding: 9px 12px;
+  border: 1px solid #c5cfc9;
+  border-radius: var(--radius-sm);
+  background: #fff;
+  color: var(--ink);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  font-size: .93rem;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(58,114,96,.15);
+}
+
+textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+
+/* ── Meal rows ─────────────────────────────────────────── */
+.meal-rows {
+  margin-top: 18px;
+  border: 1px solid var(--mealline);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.meal-row {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 180px;
+  gap: 14px;
+  align-items: center;
+  padding: 14px 16px;
+  background: #fff;
+  border-bottom: 1px solid var(--mealline);
+  transition: background var(--transition);
+}
+
+.meal-row:last-child { border-bottom: 0; }
+
+.meal-row:hover { background: #fdf5f8; }
+
+.meal-name {
+  color: var(--meal);
+  font-weight: 700;
+  font-size: .95rem;
+  line-height: 1.4;
+}
+
+.meal-map {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.meal-map::before {
+  content: '↗';
+  font-size: .85em;
+}
+
+.meal-map:hover { text-decoration: underline; }
+
+/* ── Actions bar ───────────────────────────────────────── */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+/* ── Output box ────────────────────────────────────────── */
+.output {
+  white-space: pre-wrap;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin-top: 14px;
+  min-height: 80px;
+  font-size: .9rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.status {
+  margin-top: 8px;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: .9rem;
+}
+
+/* ── Caution text ──────────────────────────────────────── */
+.caution {
+  color: #6a4808;
+  font-size: .9rem;
+  line-height: 1.5;
+  margin: 8px 0 0;
+}
+
+/* ── Live form section ─────────────────────────────────── */
+.live-form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── Footer ────────────────────────────────────────────── */
+.footer {
+  font-size: .87rem;
+  color: var(--muted);
+  margin-top: 40px;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition);
+}
+
+.footer a:hover { color: var(--forest); }
+
+/* ── Responsive ────────────────────────────────────────── */
+@media (max-width: 640px) {
+  main { padding: 22px 18px 50px; }
+  .grid2 { grid-template-columns: 1fr; }
+  .meal-row { grid-template-columns: 1fr; gap: 10px; }
+  .meal-row select { max-width: none; }
+  .actions { gap: 7px; }
+  .button { font-size: .85rem; padding: 9px 16px; }
+}
 </style>
 </head>
 <body><main>
-<a class="toplink" href="/reunion/">← Back to the reunion itinerary</a>
+<a class="toplink" href="/reunion/" id="back-link">← Reunion itinerary</a>
 <div class="eyebrow">Hazard Family Reunion · August 1–8, 2026</div>
 <h1>Meal RSVP</h1>
-<p>Please submit one response per household. Give one rough estimate of your household’s total adult-sized portions, then mark which group meals you expect to attend.</p>
+<p>Please submit one response per household. Give one rough estimate of your household's total adult-sized portions, then mark which group meals you expect to attend.</p>
 <div class="notice"><strong>Planning estimate only:</strong> this is not a reservation, promise, or food guarantee. Count adult-sized portions however seems reasonable for the people you know will attend. As a simple ceiling, the form allows up to 12 portions per household, roughly 2 adults plus 10 children.</div>
 
 <section class="card meal-card">
  <h2>Shared Google Form</h2>
- <p id="liveRsvpPending" class="caution">The shared form link has not been configured yet.</p>
- <p id="liveRsvpReady" hidden><a class="button" id="liveRsvpLink" href="#" target="_blank" rel="noopener">Open the Hazard reunion meal RSVP</a></p>
- <p class="caution">The form asks for one estimated portion total and six meal attendance choices. You can edit your response later if plans change.</p>
+ <div class="live-form-section" style="margin-top:12px">
+  <p id="liveRsvpPending" class="caution">The shared form link has not been configured yet.</p>
+  <p id="liveRsvpReady" hidden><a class="button primary" id="liveRsvpLink" href="#" target="_blank" rel="noopener">Open the Hazard reunion meal RSVP →</a></p>
+  <p class="caution">The form asks for one estimated portion total and six meal attendance choices. You can edit your response later if plans change.</p>
+ </div>
 </section>
 
 <section id="rsvp-builder" class="card">
  <h2>Personal backup RSVP builder</h2>
- <p class="caution">This prepares a text or email message; it does not submit to the shared response sheet.</p>
- <div class="grid2">
+ <p class="caution" style="margin-top:8px">This prepares a text or email message; it does not submit to the shared response sheet.</p>
+ <div class="grid2" style="margin-top:16px">
   <div><label for="household">Family / household name</label><input id="household" placeholder="e.g., Taylor &amp; family"></div>
   <div><label for="contact">Contact phone or email <small>Optional</small></label><input id="contact" placeholder="Phone or email"></div>
   <div><label for="portions">Estimated adult-sized portions <small>0–12; planning estimate only</small></label><input id="portions" type="number" min="0" max="12" value="0"></div>
   <div><label for="diet">Dietary restrictions or meal notes <small>Optional</small></label><input id="diet" placeholder="Allergies, vegetarian needs, etc."></div>
  </div>
- <div style="margin-top:15px">
+
+ <div class="meal-rows" style="margin-top:20px">
   <div class="meal-row"><div class="meal-name">Sunday, Aug. 2 — Mexican dinner in Provo Canyon: tacos, nachos, and burritos<a class="meal-map" href="https://www.google.com/maps/search/?api=1&amp;query=Provo+Canyon+Utah" target="_blank" rel="noopener">Provo Canyon on Google Maps</a></div><select id="meal1"><option>Attending</option><option>Not attending</option></select></div>
   <div class="meal-row"><div class="meal-name">Monday, Aug. 3 — BBQ pork sandwich dinner at Great Horned Owl Campground<a class="meal-map" href="https://www.google.com/maps/search/?api=1&amp;query=40.41394%2C-111.50460" target="_blank" rel="noopener">Campground on Google Maps</a></div><select id="meal2"><option>Attending</option><option>Not attending</option></select></div>
   <div class="meal-row"><div class="meal-name">Tuesday, Aug. 4 — chicken croissant sandwich lunch at North Park, with fruit, cowboy caviar, and chips<a class="meal-map" href="https://www.google.com/maps/search/?api=1&amp;query=North+Park+500+N+500+W+Provo+UT" target="_blank" rel="noopener">North Park on Google Maps</a></div><select id="meal3"><option>Attending</option><option>Not attending</option></select></div>
-  <div class="meal-row"><div class="meal-name">Wednesday, Aug. 5 — dinner at Great Horned Owl Campground, possibly at the pickleball court<a class="meal-map" href="https://www.google.com/maps/search/?api=1&amp;query=40.41394%2C-111.50460" target="_blank" rel="noopener">Campground map</a> <a class="meal-map" href="https://www.google.com/maps/search/?api=1&amp;query=Southfield+Park+Pickleball+Courts+Heber+City+UT" target="_blank" rel="noopener">Pickleball court map</a></div><select id="meal4"><option>Attending</option><option>Not attending</option></select></div>
+  <div class="meal-row"><div class="meal-name">Wednesday, Aug. 5 — dinner at Great Horned Owl Campground, possibly at the pickleball court<a class="meal-map" href="https://www.google.com/maps/search/?api=1&amp;query=40.41394%2C-111.50460" target="_blank" rel="noopener">Campground map</a></div><select id="meal4"><option>Attending</option><option>Not attending</option></select></div>
   <div class="meal-row"><div class="meal-name">Thursday, Aug. 6 — dinner and dance at the Montana Avenue backyard<a class="meal-map" href="https://www.google.com/maps/search/?api=1&amp;query=1973+Montana+Avenue+Provo+UT+84606" target="_blank" rel="noopener">Montana Avenue backyard on Google Maps</a></div><select id="meal5"><option>Attending</option><option>Not attending</option></select></div>
   <div class="meal-row"><div class="meal-name">Friday, Aug. 7 — dinner at Great Horned Owl Campground<a class="meal-map" href="https://www.google.com/maps/search/?api=1&amp;query=40.41394%2C-111.50460" target="_blank" rel="noopener">Campground on Google Maps</a></div><select id="meal6"><option>Attending</option><option>Not attending</option></select></div>
  </div>
- <div class="actions"><button class="button" type="button" onclick="buildRsvp()">Prepare RSVP</button><button class="button secondary" type="button" onclick="copyRsvp()">Copy RSVP</button><button class="button secondary" type="button" onclick="shareRsvp()">Share / text RSVP</button><a class="button secondary" id="emailRsvp" href="#">Email RSVP</a></div>
- <div id="rsvpOutput" class="output">Fill in your estimate, then choose “Prepare RSVP.”</div>
+
+ <div class="actions">
+  <button class="button" type="button" id="btn-prepare" onclick="buildRsvp()">Prepare RSVP</button>
+  <button class="button secondary" type="button" id="btn-copy" onclick="copyRsvp()">Copy RSVP</button>
+  <button class="button secondary" type="button" id="btn-share" onclick="shareRsvp()">Share / text RSVP</button>
+  <a class="button secondary" id="emailRsvp" href="#">Email RSVP</a>
+ </div>
+ <div id="rsvpOutput" class="output">Fill in your estimate, then choose "Prepare RSVP."</div>
  <div id="rsvpStatus" class="status" aria-live="polite"></div>
 </section>
 
 <details class="card">
  <summary><strong>Organizer setup and totals</strong></summary>
- <p>The form’s <strong>Meal Totals</strong> sheet sums estimated adult-sized portions only for households marked as attending each meal. Those numbers are for planning and shopping, not a guarantee of servings.</p>
+ <p style="margin-top:12px">The form's <strong>Meal Totals</strong> sheet sums estimated adult-sized portions only for households marked as attending each meal. Those numbers are for planning and shopping, not a guarantee of servings.</p>
  <ol>
   <li>Open <a href="https://script.new" target="_blank" rel="noopener">script.new</a> in the owning Google account.</li>
   <li>Paste <a href="../create_hazard_rsvp_form.gs">create_hazard_rsvp_form.gs</a> into Apps Script.</li>
@@ -55,14 +436,18 @@
  </ol>
 </details>
 
-<footer class="footer"><a href="/reunion/">Itinerary</a> · <a href="/reunion/edit">Edit this page</a> · <a href="/reunion/admin">Admin chat</a></footer>
+<footer class="footer">
+  <a href="/reunion/" id="footer-itinerary">Itinerary</a>
+  <a href="/reunion/edit" id="footer-edit">Edit this page</a>
+  <a href="/reunion/admin" id="footer-admin">Admin chat</a>
+</footer>
 </main>
 <script src="../config.js"></script>
 <script>
 const liveRsvpUrl=typeof window.REUNION_CONFIG?.rsvpFormUrl==='string'?window.REUNION_CONFIG.rsvpFormUrl.trim():'';
 if(liveRsvpUrl){document.getElementById('liveRsvpLink').href=liveRsvpUrl;document.getElementById('liveRsvpReady').hidden=false;document.getElementById('liveRsvpPending').hidden=true;}
 const meals=[['Sunday, Aug. 2 — Mexican dinner in Provo Canyon: tacos, nachos, and burritos','meal1'],['Monday, Aug. 3 — BBQ pork sandwich dinner at Great Horned Owl Campground','meal2'],['Tuesday, Aug. 4 — chicken croissant sandwich lunch at North Park, with fruit, cowboy caviar, and chips','meal3'],['Wednesday, Aug. 5 — dinner at Great Horned Owl Campground, possibly at the pickleball court','meal4'],['Thursday, Aug. 6 — dinner and dance at the Montana Avenue backyard','meal5'],['Friday, Aug. 7 — dinner at Great Horned Owl Campground','meal6']];
-function buildRsvp(){const household=document.getElementById('household').value.trim()||'[Household name]';const contact=document.getElementById('contact').value.trim();const portions=Math.max(0,Math.min(12,parseInt(document.getElementById('portions').value,10)||0));const diet=document.getElementById('diet').value.trim();let lines=['HAZARD FAMILY REUNION — MEAL RSVP','Household: '+household,'Estimated adult-sized portions: '+portions,'(Planning estimate only; not a food guarantee.)'];if(contact)lines.push('Contact: '+contact);lines.push('');meals.forEach(([name,id])=>lines.push(name+': '+document.getElementById(id).value));lines.push('','Dietary restrictions / notes: '+(diet||'None'));const text=lines.join('\n');document.getElementById('rsvpOutput').textContent=text;document.getElementById('emailRsvp').href='mailto:?subject='+encodeURIComponent('Hazard Family Reunion meal RSVP — '+household)+'&body='+encodeURIComponent(text);document.getElementById('rsvpStatus').textContent='RSVP prepared.';return text;}
+function buildRsvp(){const household=document.getElementById('household').value.trim()||'[Household name]';const contact=document.getElementById('contact').value.trim();const portions=Math.max(0,Math.min(12,parseInt(document.getElementById('portions').value,10)||0));const diet=document.getElementById('diet').value.trim();let lines=['HAZARD FAMILY REUNION — MEAL RSVP','Household: '+household,'Estimated adult-sized portions: '+portions,'(Planning estimate only; not a food guarantee.)'];if(contact)lines.push('Contact: '+contact);lines.push('');meals.forEach(([name,id])=>lines.push(name+': '+document.getElementById(id).value));lines.push('','Dietary restrictions / notes: '+(diet||'None'));const text=lines.join('\n');document.getElementById('rsvpOutput').textContent=text;document.getElementById('rsvpOutput').style.color='var(--ink)';document.getElementById('emailRsvp').href='mailto:?subject='+encodeURIComponent('Hazard Family Reunion meal RSVP — '+household)+'&body='+encodeURIComponent(text);document.getElementById('rsvpStatus').textContent='RSVP prepared.';return text;}
 async function copyRsvp(){const text=buildRsvp();try{await navigator.clipboard.writeText(text);document.getElementById('rsvpStatus').textContent='RSVP copied to the clipboard.';}catch(e){document.getElementById('rsvpStatus').textContent='Copy was blocked. Select the prepared RSVP text and copy it manually.';}}
 async function shareRsvp(){const text=buildRsvp();if(navigator.share){try{await navigator.share({title:'Hazard Family Reunion meal RSVP',text});document.getElementById('rsvpStatus').textContent='RSVP shared.';return;}catch(e){if(e.name==='AbortError')return;}}await copyRsvp();}
 buildRsvp();

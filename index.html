@@ -4,99 +4,706 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hazard Family Reunion — August 1–8, 2026</title>
+<meta name="description" content="Hazard Family Reunion — a week of camping, hiking, water activities, games, and shared meals in Utah, August 1–8, 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --ink:#22302c;--muted:#65736e;--paper:#fffdf8;--page:#f0eadf;
-  --forest:#24483f;--accent:#39715f;--sage:#e5f0e8;--line:#d8ded8;
-  --sun:#f3b64d;--sunbg:#fff5d9;--coral:#d87559;--coralbg:#fff0e8;
-  --berry:#7c3f58;--button:#225a4d;--soft:#f7f8f4;--blue:#185c8c;
+/* ── Design tokens ─────────────────────────────────────── */
+:root {
+  --ink: #1c2b26;
+  --muted: #5c706a;
+  --paper: #fffdf8;
+  --page: #eee8da;
+  --forest: #1e4037;
+  --forest2: #2d5e4e;
+  --accent: #3a7260;
+  --sage: #e4f0e8;
+  --sage2: #d0e6d7;
+  --line: #d5ddd5;
+  --sun: #f3b64d;
+  --sunbg: #fff8e1;
+  --coral: #c96748;
+  --coralbg: #fff0e8;
+  --berry: #7c3f58;
+  --button: #1e4037;
+  --soft: #f4f7f4;
+  --blue: #1a5c92;
+  --bluebg: #e8f1fa;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --shadow-sm: 0 2px 8px rgba(30,64,55,.08);
+  --shadow-md: 0 6px 20px rgba(30,64,55,.1);
+  --shadow-lg: 0 16px 40px rgba(30,64,55,.12);
+  --transition: 0.18s ease;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:radial-gradient(circle at 10% 0%,#fff8e9 0 18%,transparent 42%),var(--page);color:var(--ink);font:16px/1.52 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
-main{max-width:1040px;margin:0 auto;background:var(--paper);min-height:100vh;padding:28px 34px 70px;box-shadow:0 0 45px #18261f20}
-header.hero{position:relative;overflow:hidden;background:linear-gradient(125deg,#234d43 0%,#39715f 58%,#669678 100%);color:#fff;padding:30px 32px 28px;border-radius:20px;box-shadow:0 12px 28px #24483f22}
-header.hero::after{content:"✦";position:absolute;right:28px;top:16px;color:#ffdf8a;font:700 6rem/1 Georgia,serif;opacity:.55;transform:rotate(15deg)}
-h1{position:relative;margin:.1rem 0 .45rem;font:800 clamp(2.2rem,5vw,4rem)/1.02 Georgia,serif;letter-spacing:-.02em;color:#fff;z-index:1}
-h2{font:750 1.55rem/1.15 Georgia,serif;color:var(--forest);margin:0}
-h3{margin:0 0 10px;color:var(--forest);font-size:1.08rem}
-.subtitle{position:relative;color:#e9f5ed;font-size:1.05rem;z-index:1}
-.updated{position:relative;margin-top:8px;color:#cde3d4;font-size:.88rem;z-index:1}
-.hero-intro{position:relative;max-width:650px;margin:17px 0 0;color:#f5fbf5;z-index:1}
-.hero-actions{position:relative;display:flex;flex-wrap:wrap;gap:9px;margin-top:20px;z-index:1}
-.jump{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 6px}
-.jump a,.button{display:inline-block;border:0;border-radius:999px;padding:9px 14px;background:var(--button);color:#fff;text-decoration:none;font-weight:750;cursor:pointer;font:inherit}
-.jump a.primary,.hero-actions .primary{background:var(--coral);box-shadow:0 4px 10px #d8755940}
-.button.secondary,.jump a.secondary,.hero-actions .secondary{background:#e5ece7;color:var(--forest)}
-.button:disabled{background:#aeb9b5;cursor:not-allowed}
-.day{scroll-margin-top:12px;background:#fff;border:1px solid var(--line);border-radius:17px;padding:22px 20px 18px;margin:20px 0;box-shadow:0 6px 18px #24483f0d}
-.dayhead{display:flex;align-items:center;gap:11px;margin-bottom:14px}
-.dayhead h2{letter-spacing:-.01em}
-.date{color:var(--forest);font-weight:750;background:var(--sage);padding:5px 10px;border-radius:999px;font-size:.88rem}
-.item{display:grid;grid-template-columns:112px 1fr;gap:14px;padding:13px 14px;margin:8px 0;border:1px solid #e7ebe5;border-left:5px solid #b7d1bf;border-radius:12px;background:#fbfcf9}
-.item.meal{border-left-color:var(--coral);background:var(--coralbg)}
-.time{justify-self:start;font-weight:800;color:var(--forest);background:var(--sage);border-radius:999px;padding:5px 9px;line-height:1.2;font-size:.82rem;white-space:nowrap}
-.meal .time{background:#ffe0d0;color:#8f4935}
-.item strong{font-size:1.04rem;letter-spacing:-.005em}
-.details{margin-top:7px}
-.maplinks{display:flex;flex-wrap:wrap;gap:7px}
-.maplink{display:inline-flex;align-items:center;gap:4px;font-size:.88rem;font-weight:750;color:var(--blue);background:#edf5ff;border:1px solid #cfe0f2;border-radius:999px;padding:5px 9px}
-.maplink::before{content:"↗";font-weight:900}
-.keypoint{display:block;margin-top:8px;padding:8px 10px;border-radius:9px;background:#fff1c9;color:#755514;font-weight:750}
-.more{margin-top:7px;font-size:.91rem}
-.more summary{display:inline-block;color:var(--blue);cursor:pointer;font-weight:700}
-.more summary::marker{color:var(--accent)}
-.detailbody{margin-top:8px;padding:10px 12px;border-left:3px solid #d9e3dc;color:var(--muted);background:#f8faf7;border-radius:0 8px 8px 0}
-.meal strong{color:var(--berry)}
-a{color:var(--blue);text-underline-offset:2px}
-.tag{display:inline-block;font-size:.76rem;font-weight:750;padding:3px 8px;border-radius:999px;background:#edf0f2;color:#4a5563;margin-left:6px;vertical-align:2px}
-.tag.own{background:#edf2f8;color:#36526f}
-.tag.together{background:#ffe0d0;color:#8f4935}
-.addr{font-style:normal}
-.card{border:1px solid var(--line);background:var(--soft);border-radius:10px;padding:17px;margin:13px 0}
-label{font-weight:650}
-label small{display:block;font-weight:400;color:var(--muted)}
-.checklist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:8px}.checklist label{display:flex;align-items:flex-start;gap:8px;break-inside:avoid;padding:10px 11px;font-weight:650;background:#f8faf7;border:1px solid #e0e8e0;border-radius:10px}.checklist input{width:auto;margin:3px 0 0}
-.confirmations{background:var(--sunbg);border-color:#efd38f}.confirmations .dayhead h2{color:#7d5b15}.confirmations ul{margin:8px 0 0;padding-left:22px}.confirmations li{padding:4px 0}.confirmations li::marker{color:#c4861c}
-.bring{background:var(--sage)}
-.bring .dayhead h2::before{content:"✦ ";color:var(--coral)}
-.meal-guide{display:flex;flex-wrap:wrap;align-items:center;gap:8px 15px;padding:12px 14px;margin:13px 0 6px;border:1px solid #e4d9d0;border-radius:10px;background:#fff8f1;color:var(--muted)}
-.meal-guide strong{color:var(--forest)}
-.meal-guide .tag{margin-left:0}
-.printnote{display:none}
-@media(max-width:760px){
- main{padding:18px 13px 45px}header.hero{padding:25px 22px;border-radius:15px}header.hero::after{right:14px;top:20px;font-size:4.2rem}.item{grid-template-columns:1fr;gap:7px}.checklist{grid-template-columns:1fr}
+
+/* ── Reset & base ──────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--page);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 10% -5%, #e8f4ec 0%, transparent 55%),
+    radial-gradient(ellipse 60% 40% at 90% 100%, #e4d8c8 0%, transparent 50%);
+  color: var(--ink);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
 }
-@media print{
- body{background:white}main{box-shadow:none;max-width:none;padding:0}.day{break-inside:avoid}.card{break-inside:avoid}.printnote{display:block}.jump,.hero-actions{display:none}
+
+main {
+  max-width: 1060px;
+  margin: 0 auto;
+  background: var(--paper);
+  min-height: 100vh;
+  padding: 32px 38px 80px;
+  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(30,64,55,.04);
+}
+
+/* ── Typography ────────────────────────────────────────── */
+h1 {
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(2.3rem, 5vw, 3.8rem);
+  line-height: 1.05;
+  letter-spacing: -.025em;
+  color: #fff;
+  margin: .1rem 0 .5rem;
+  position: relative;
+  z-index: 1;
+}
+
+h2 {
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 600;
+  font-size: 1.55rem;
+  line-height: 1.2;
+  color: var(--forest);
+  margin: 0;
+  letter-spacing: -.01em;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--forest);
+  margin: 0 0 10px;
+}
+
+a { color: var(--blue); text-underline-offset: 2px; }
+
+/* ── Hero ──────────────────────────────────────────────── */
+header.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(130deg, #183830 0%, #255448 50%, #3a7260 85%, #52917a 100%);
+  color: #fff;
+  padding: 38px 38px 34px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 4px;
+}
+
+/* Decorative background shapes */
+header.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 70% at 100% 120%, rgba(255,220,130,.12) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at -10% -20%, rgba(255,255,255,.07) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Mountain silhouette decoration */
+header.hero::after {
+  content: '⛰';
+  position: absolute;
+  right: 32px;
+  bottom: -8px;
+  font-size: 9rem;
+  line-height: 1;
+  opacity: .1;
+  filter: grayscale(1) brightness(2);
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-eyebrow {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: rgba(255,255,255,.7);
+  font-size: .88rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  z-index: 1;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 2px;
+  background: var(--sun);
+  border-radius: 2px;
+}
+
+.subtitle {
+  position: relative;
+  color: rgba(233,245,237,.9);
+  font-size: 1.05rem;
+  font-weight: 500;
+  z-index: 1;
+}
+
+.updated {
+  position: relative;
+  margin-top: 6px;
+  color: rgba(200,230,215,.7);
+  font-size: .85rem;
+  z-index: 1;
+}
+
+.hero-intro {
+  position: relative;
+  max-width: 600px;
+  margin: 18px 0 0;
+  color: rgba(245,252,247,.88);
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.65;
+  z-index: 1;
+}
+
+.hero-actions {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+  z-index: 1;
+}
+
+/* ── Buttons & pills ───────────────────────────────────── */
+.button,
+.jump a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 18px;
+  background: var(--button);
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: .92rem;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition), opacity var(--transition);
+}
+
+.button:hover,
+.jump a:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(30,64,55,.25);
+}
+
+.button:active,
+.jump a:active {
+  transform: translateY(0);
+}
+
+.jump a.primary,
+.hero-actions .primary,
+.button.primary {
+  background: var(--coral);
+  box-shadow: 0 4px 14px rgba(201,103,72,.3);
+}
+
+.jump a.primary:hover,
+.hero-actions .primary:hover,
+.button.primary:hover {
+  background: #b85d3f;
+  box-shadow: 0 6px 20px rgba(201,103,72,.4);
+}
+
+.button.secondary,
+.jump a.secondary,
+.hero-actions .secondary {
+  background: rgba(255,255,255,.18);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.25);
+  backdrop-filter: blur(6px);
+}
+
+.button.secondary:hover,
+.jump a.secondary:hover,
+.hero-actions .secondary:hover {
+  background: rgba(255,255,255,.26);
+  box-shadow: 0 4px 14px rgba(0,0,0,.12);
+}
+
+.button:disabled {
+  background: #aeb9b5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  opacity: .7;
+}
+
+/* ── Jump nav ──────────────────────────────────────────── */
+nav.jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 22px 0 8px;
+  padding: 14px 16px;
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+}
+
+nav.jump a {
+  font-size: .85rem;
+  padding: 7px 13px;
+}
+
+nav.jump a.primary {
+  background: var(--coral);
+  box-shadow: 0 3px 10px rgba(201,103,72,.25);
+}
+
+nav.jump a.secondary {
+  background: #fff;
+  color: var(--forest);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+
+nav.jump a.secondary:hover {
+  background: var(--sage);
+  border-color: var(--sage2);
+  box-shadow: 0 2px 8px rgba(30,64,55,.1);
+  color: var(--forest);
+}
+
+/* ── Meal guide ────────────────────────────────────────── */
+.meal-guide {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+  padding: 13px 17px;
+  margin: 4px 0 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--soft);
+  font-size: .93rem;
+  color: var(--muted);
+}
+
+.meal-guide strong {
+  color: var(--forest);
+  font-weight: 700;
+}
+
+.meal-guide .tag { margin-left: 0; }
+
+/* ── Tags ──────────────────────────────────────────────── */
+.tag {
+  display: inline-block;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: #e8edf0;
+  color: #4a5563;
+  margin-left: 8px;
+  vertical-align: 2px;
+}
+
+.tag.own {
+  background: var(--bluebg);
+  color: #1a5c92;
+}
+
+.tag.together {
+  background: #ffe0d0;
+  color: #8f4935;
+}
+
+/* ── Day cards ─────────────────────────────────────────── */
+.day {
+  scroll-margin-top: 14px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 24px 22px 20px;
+  margin: 18px 0;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition);
+}
+
+.day:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.dayhead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.date {
+  color: var(--forest);
+  font-weight: 700;
+  font-size: .82rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  background: var(--sage);
+  border: 1px solid var(--sage2);
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+/* ── Schedule items ────────────────────────────────────── */
+.item {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 14px;
+  padding: 14px 15px;
+  margin: 8px 0;
+  border: 1px solid #e8ede6;
+  border-left: 4px solid #c0d4c0;
+  border-radius: var(--radius-sm);
+  background: #fafcf9;
+  transition: border-left-color var(--transition), box-shadow var(--transition);
+}
+
+.item:hover {
+  box-shadow: var(--shadow-sm);
+  border-left-color: var(--accent);
+}
+
+.item.meal {
+  border-left-color: var(--coral);
+  background: #fef9f7;
+}
+
+.item.meal:hover {
+  border-left-color: #b05038;
+}
+
+.time {
+  justify-self: start;
+  align-self: start;
+  font-weight: 700;
+  font-size: .78rem;
+  letter-spacing: .02em;
+  color: var(--forest);
+  background: var(--sage);
+  border: 1px solid var(--sage2);
+  border-radius: 999px;
+  padding: 5px 10px;
+  line-height: 1.2;
+  white-space: nowrap;
+  margin-top: 1px;
+}
+
+.meal .time {
+  background: #ffe8dc;
+  border-color: #f0ccbc;
+  color: #8a4230;
+}
+
+.item strong {
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  color: var(--ink);
+}
+
+.meal strong { color: var(--berry); }
+
+.details { margin-top: 8px; }
+
+/* ── Map links ─────────────────────────────────────────── */
+.maplinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 6px;
+}
+
+.maplink {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--blue);
+  background: var(--bluebg);
+  border: 1px solid #c5daf0;
+  border-radius: 999px;
+  padding: 5px 11px;
+  text-decoration: none;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.maplink::before {
+  content: '↗';
+  font-weight: 900;
+  font-size: .8em;
+}
+
+.maplink:hover {
+  background: #d5e8f7;
+  transform: translateY(-1px);
+}
+
+/* ── Key point callout ─────────────────────────────────── */
+.keypoint {
+  display: block;
+  margin-top: 10px;
+  padding: 10px 13px;
+  border-radius: var(--radius-sm);
+  background: #fff8e0;
+  border: 1px solid #f0d870;
+  color: #6b4a0a;
+  font-weight: 600;
+  font-size: .92rem;
+  line-height: 1.5;
+}
+
+/* ── Details / more ────────────────────────────────────── */
+.more {
+  margin-top: 8px;
+  font-size: .91rem;
+}
+
+.more summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--blue);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: .88rem;
+  padding: 3px 0;
+  list-style: none;
+  transition: color var(--transition);
+}
+
+.more summary::-webkit-details-marker { display: none; }
+.more summary::marker { display: none; }
+
+.more summary::before {
+  content: '▶';
+  font-size: .65em;
+  transition: transform .2s ease;
+}
+
+details[open] > .more summary::before,
+.more[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+details.more[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.more summary:hover { color: #0e4070; }
+
+.detailbody {
+  margin-top: 8px;
+  padding: 12px 14px;
+  border-left: 3px solid var(--sage2);
+  color: var(--muted);
+  background: #f7faf7;
+  border-radius: 0 8px 8px 0;
+  font-size: .93rem;
+  line-height: 1.6;
+}
+
+.addr { font-style: normal; }
+
+/* ── Bring checklist card ──────────────────────────────── */
+.card {
+  border: 1px solid var(--line);
+  background: var(--soft);
+  border-radius: var(--radius-sm);
+  padding: 17px;
+  margin: 13px 0;
+}
+
+label { font-weight: 600; }
+
+label small {
+  display: block;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.checklist {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.checklist label {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  break-inside: avoid;
+  padding: 11px 13px;
+  font-weight: 600;
+  font-size: .93rem;
+  background: #fff;
+  border: 1px solid #dde6dc;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.checklist label:hover {
+  background: var(--sage);
+  border-color: var(--sage2);
+}
+
+.checklist input {
+  width: auto;
+  margin: 3px 0 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Special day card variants */
+.bring {
+  background: linear-gradient(135deg, #f3fbf5 0%, #eaf5ed 100%);
+  border-color: var(--sage2);
+}
+
+.bring .dayhead h2::before {
+  content: '✦ ';
+  color: var(--coral);
+}
+
+.confirmations {
+  background: var(--sunbg);
+  border-color: #e8d890;
+}
+
+.confirmations .dayhead h2 { color: #7a5610; }
+.confirmations .dayhead { border-bottom-color: #e8d88a; }
+
+.confirmations ul {
+  margin: 4px 0 0;
+  padding-left: 22px;
+}
+
+.confirmations li {
+  padding: 5px 0;
+  color: var(--muted);
+  font-size: .97rem;
+}
+
+.confirmations li::marker { color: #c48420; }
+
+/* ── Footer admin links ─────────────────────────────────── */
+footer.sources {
+  margin-top: 30px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: .88rem;
+}
+
+footer.sources a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+footer.sources a:hover { color: var(--forest); }
+
+/* ── Print ─────────────────────────────────────────────── */
+.printnote { display: none; }
+
+/* ── Responsive ────────────────────────────────────────── */
+@media (max-width: 760px) {
+  main { padding: 18px 16px 50px; }
+  header.hero { padding: 28px 22px 26px; border-radius: var(--radius-md); }
+  header.hero::after { font-size: 6rem; right: 14px; }
+  h1 { font-size: clamp(2rem, 8vw, 3rem); }
+  .item { grid-template-columns: 1fr; gap: 8px; }
+  .checklist { grid-template-columns: 1fr; }
+  nav.jump { padding: 10px 12px; }
+  nav.jump a { font-size: .82rem; padding: 6px 11px; }
+}
+
+@media print {
+  body { background: white; }
+  main { box-shadow: none; max-width: none; padding: 0; }
+  .day { break-inside: avoid; }
+  .card { break-inside: avoid; }
+  .printnote { display: block; }
+  nav.jump, .hero-actions { display: none; }
 }
 </style>
 </head>
 <body><main>
 <header class="hero">
-  <div class="subtitle">Family reunion / camping week</div>
+  <div class="hero-eyebrow">Family reunion · camping week</div>
   <h1>Hazard Family Reunion</h1>
   <div class="subtitle">Saturday, August 1 through Saturday, August 8, 2026 · Utah County, Wasatch County &amp; South Weber</div>
   <div class="updated">Updated July 30, 2026</div>
   <p class="hero-intro">A week of camping, water, games, shared meals, and a few excellent reasons to bring a cooler.</p>
-  <div class="hero-actions"><a class="primary" href="/reunion/rsvp/">Meal RSVP</a><a class="secondary" href="#bring">What to bring</a><a class="secondary" href="#confirm">Still to confirm</a></div>
+  <div class="hero-actions">
+    <a class="button primary" href="/reunion/rsvp/" id="hero-rsvp-btn">Meal RSVP</a>
+    <a class="button secondary" href="#bring" id="hero-bring-btn">What to bring</a>
+    <a class="button secondary" href="#confirm" id="hero-confirm-btn">Still to confirm</a>
+  </div>
 </header>
 
-<nav class="jump" aria-label="Page links">
-  <a class="primary" href="/reunion/rsvp/">Meal RSVP</a>
-  <a class="secondary" href="#sat1">Sat. Aug. 1</a><a class="secondary" href="#sun">Sunday</a><a class="secondary" href="#mon">Monday</a><a class="secondary" href="#tue">Tuesday</a><a class="secondary" href="#wed">Wednesday</a><a class="secondary" href="#thu">Thursday</a><a class="secondary" href="#fri">Friday</a><a class="secondary" href="#sat2">Sat. Aug. 8</a><a class="secondary" href="#confirm">Still to confirm</a>
+<nav class="jump" aria-label="Jump to day">
+  <a class="primary" href="/reunion/rsvp/" id="nav-rsvp-btn">Meal RSVP</a>
+  <a class="secondary" href="#sat1" id="nav-sat1">Sat. Aug. 1</a>
+  <a class="secondary" href="#sun" id="nav-sun">Sunday</a>
+  <a class="secondary" href="#mon" id="nav-mon">Monday</a>
+  <a class="secondary" href="#tue" id="nav-tue">Tuesday</a>
+  <a class="secondary" href="#wed" id="nav-wed">Wednesday</a>
+  <a class="secondary" href="#thu" id="nav-thu">Thursday</a>
+  <a class="secondary" href="#fri" id="nav-fri">Friday</a>
+  <a class="secondary" href="#sat2" id="nav-sat2">Sat. Aug. 8</a>
+  <a class="secondary" href="#confirm" id="nav-confirm">Still to confirm</a>
 </nav>
 
 <div class="meal-guide" aria-label="Meal guide">
- <strong>Meal guide</strong>
- <span><span class="tag own">On your own</span> bring or buy your own food</span>
- <span><span class="tag together">Eat together</span> reunion group meal</span>
+  <strong>Meal guide</strong>
+  <span><span class="tag own">On your own</span> bring or buy your own food</span>
+  <span><span class="tag together">Eat together</span> reunion group meal</span>
 </div>
 
 <section class="day" id="sat1">
  <div class="dayhead"><h2>Saturday</h2><span class="date">August 1</span></div>
  <div class="item"><div class="time">TBD</div><div><strong>Meet at South Fork Park</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=4988+N+South+Fork+Road+Provo+UT+84604" target="_blank" rel="noopener">South Fork Park on Google Maps</a></div><details class="more"><summary>More details</summary><div class="detailbody"><address class="addr">4988 N South Fork Road, Provo, UT 84604</address></div></details></div></div></div>
- <div class="item"><div class="time">3:00 PM</div><div><strong>Great Horned Owl Campground check-in begins</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=40.41394%2C-111.50460" target="_blank" rel="noopener">Campground map</a><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=5566+UT-314+Wallsburg+UT+84082" target="_blank" rel="noopener">Main entrance map</a></div><details class="more"><summary>More details</summary><div class="detailbody"><address class="addr">Great Horned Owl Campground, Deer Creek State Park<br>Main entrance: 5566 UT-314, Wallsburg, UT 84082<br>Campground GPS: 40.41394, -111.50460</address>Park information: <a href="tel:+14356540171">435-654-0171</a> · Reservations: <a href="tel:+18003223770">800-322-3770</a><br>Enter through Deer Creek State Park’s main entrance; Great Horned Owl is just inside the park. Check-in is 3:00 PM and check-out is noon. The campground has no hookups; sites have picnic tables, charcoal grills and fire rings, with flush restrooms and showers nearby.</div></details></div></div></div>
+ <div class="item"><div class="time">3:00 PM</div><div><strong>Great Horned Owl Campground check-in begins</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=40.41394%2C-111.50460" target="_blank" rel="noopener">Campground map</a><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=5566+UT-314+Wallsburg+UT+84082" target="_blank" rel="noopener">Main entrance map</a></div><details class="more"><summary>More details</summary><div class="detailbody"><address class="addr">Great Horned Owl Campground, Deer Creek State Park<br>Main entrance: 5566 UT-314, Wallsburg, UT 84082<br>Campground GPS: 40.41394, -111.50460</address>Park information: <a href="tel:+14356540171">435-654-0171</a> · Reservations: <a href="tel:+18003223770">800-322-3770</a><br>Enter through Deer Creek State Park's main entrance; Great Horned Owl is just inside the park. Check-in is 3:00 PM and check-out is noon. The campground has no hookups; sites have picnic tables, charcoal grills and fire rings, with flush restrooms and showers nearby.</div></details></div></div></div>
  <div class="item meal"><div class="time">Evening</div><div><strong>Dinner</strong><span class="tag own">on your own</span></div></div>
 </section>
 
@@ -114,7 +721,7 @@ label small{display:block;font-weight:400;color:var(--muted)}
  <div class="item"><div class="time">Before 9</div><div><strong>Pack a lunch to go</strong></div></div>
  <div class="item"><div class="time">9:00 AM</div><div><strong>Hike at Big Springs Park</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=7201+N+South+Fork+Road+Provo+UT+84604" target="_blank" rel="noopener">Big Springs Park on Google Maps</a></div><details class="more"><summary>More details</summary><div class="detailbody"><address class="addr">7201 N South Fork Road, Provo, UT 84604</address></div></details></div></div></div>
  <div class="item meal"><div class="time">Midday</div><div><strong>Picnic lunch at Big Springs Park</strong><span class="tag own">on your own</span><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=7201+N+South+Fork+Road+Provo+UT+84604" target="_blank" rel="noopener">Big Springs Park on Google Maps</a></div></div></div></div>
- <div class="item"><div class="time">After lunch</div><div><strong>Self-guided Provo River float</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Lower+Provo+River+Park+Utah" target="_blank" rel="noopener">Put-in map</a><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Vivian+Park+6828+South+Fork+Road+Provo+UT" target="_blank" rel="noopener">Take-out map</a></div><details class="more"><summary>Safety and logistics</summary><div class="detailbody"><strong>Bring your own kayaks, tubes or raft, paddles and properly fitted life jackets.</strong> This is not an outfitter trip, so there is no equipment rental or commercial shuttle included.<br><strong>Put-in:</strong> Lower Provo River Park, immediately below Deer Creek Dam.<br><strong>Take-out:</strong> Vivian Park, <address class="addr" style="display:inline">6828 South Fork Road, Provo, UT 84606</address>.<br>The standard lower-river float is roughly 5–6 miles and commonly takes about 1–1½ hours depending on flow. Stage enough vehicles at Vivian Park before launching, shuttle drivers back to the put-in, and retrieve the put-in vehicles afterward. Lower Provo River Park has a Deer Creek State Park day-use fee.<br><strong>Safety:</strong> Utah requires every person on a river vessel—including an inner tube—to wear a properly sized U.S. Coast Guard-approved life jacket. The water is about 45°F, secure river shoes are strongly recommended, and the angled supports at the Wildwood railroad trestle are the principal obstacle on this stretch. Check the day’s river flow and weather before launching.</div></details></div></div></div>
+ <div class="item"><div class="time">After lunch</div><div><strong>Self-guided Provo River float</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Lower+Provo+River+Park+Utah" target="_blank" rel="noopener">Put-in map</a><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Vivian+Park+6828+South+Fork+Road+Provo+UT" target="_blank" rel="noopener">Take-out map</a></div><details class="more"><summary>Safety and logistics</summary><div class="detailbody"><strong>Bring your own kayaks, tubes or raft, paddles and properly fitted life jackets.</strong> This is not an outfitter trip, so there is no equipment rental or commercial shuttle included.<br><strong>Put-in:</strong> Lower Provo River Park, immediately below Deer Creek Dam.<br><strong>Take-out:</strong> Vivian Park, <address class="addr" style="display:inline">6828 South Fork Road, Provo, UT 84606</address>.<br>The standard lower-river float is roughly 5–6 miles and commonly takes about 1–1½ hours depending on flow. Stage enough vehicles at Vivian Park before launching, shuttle drivers back to the put-in, and retrieve the put-in vehicles afterward. Lower Provo River Park has a Deer Creek State Park day-use fee.<br><strong>Safety:</strong> Utah requires every person on a river vessel—including an inner tube—to wear a properly sized U.S. Coast Guard-approved life jacket. The water is about 45°F, secure river shoes are strongly recommended, and the angled supports at the Wildwood railroad trestle are the principal obstacle on this stretch. Check the day's river flow and weather before launching.</div></details></div></div></div>
  <div class="item"><div class="time">Evening</div><div><strong>Pickleball at Southfield Park</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Southfield+Park+Pickleball+Courts+Heber+City+UT" target="_blank" rel="noopener">Southfield Park on Google Maps</a></div><details class="more"><summary>More details</summary><div class="detailbody"><address class="addr">1200 W Midway Lane, Heber City, UT 84032</address>Outdoor dedicated courts; bring paddles and balls.</div></details></div></div></div>
  <div class="item meal"><div class="time">Evening</div><div><strong>BBQ pork sandwich dinner at Great Horned Owl Campground</strong><span class="tag together">eat together</span><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=40.41394%2C-111.50460" target="_blank" rel="noopener">Campground map</a></div></div></div></div>
 </section>
@@ -158,7 +765,7 @@ label small{display:block;font-weight:400;color:var(--muted)}
 <section class="day" id="sat2">
  <div class="dayhead"><h2>Saturday</h2><span class="date">August 8</span></div>
  <div class="item"><div class="time">By 12:00 PM</div><div><strong>Pack up and check out</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=40.41394%2C-111.50460" target="_blank" rel="noopener">Campground map</a></div><details class="more"><summary>More details</summary><div class="detailbody">Deer Creek State Park campground checkout is noon.</div></details></div></div></div>
- <div class="item"><div class="time">7:00 PM</div><div><strong>Madeline’s baby blessing</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=1973+Montana+Avenue+Provo+UT+84606" target="_blank" rel="noopener">Montana Avenue backyard on Google Maps</a></div><details class="more"><summary>More details</summary><div class="detailbody">Mykel’s family is blessing Madeline. The current plan is to hold it in the backyard at <address class="addr" style="display:inline">1973 Montana Avenue, Provo, UT 84606</address>. The backyard location is still described as probable rather than final.</div></details></div></div></div>
+ <div class="item"><div class="time">7:00 PM</div><div><strong>Madeline's baby blessing</strong><div class="details"><div class="maplinks"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=1973+Montana+Avenue+Provo+UT+84606" target="_blank" rel="noopener">Montana Avenue backyard on Google Maps</a></div><details class="more"><summary>More details</summary><div class="detailbody">Mykel's family is blessing Madeline. The current plan is to hold it in the backyard at <address class="addr" style="display:inline">1973 Montana Avenue, Provo, UT 84606</address>. The backyard location is still described as probable rather than final.</div></details></div></div></div>
 </section>
 
 <section class="day bring" id="bring">
@@ -177,7 +784,7 @@ label small{display:block;font-weight:400;color:var(--muted)}
   <label><input type="checkbox"> Camp stove and large pot, if you have one, for spaghetti</label>
   <label><input type="checkbox"> Sunscreen</label>
   <label><input type="checkbox"> Camp chairs</label>
-  <label><input type="checkbox"> Supplies for activities you’re in charge of</label>
+  <label><input type="checkbox"> Supplies for activities you're in charge of</label>
  </div>
 </section>
 
@@ -185,14 +792,15 @@ label small{display:block;font-weight:400;color:var(--muted)}
  <div class="dayhead"><h2>Still to confirm</h2></div>
  <ul>
   <li>Exact campsite site numbers.</li>
- <li>Saturday’s meeting time at South Fork Park.</li>
- <li>Wednesday dinner location: the campground or the pickleball court.</li>
- <li>Which Provo Recreation Center pools will be available Tuesday.</li>
- <li>Whether Splash Summit allows same-day re-entry after leaving for lunch.</li>
- <li>Saturday evening’s location for Madeline’s baby blessing.</li>
+  <li>Saturday's meeting time at South Fork Park.</li>
+  <li>Wednesday dinner location: the campground or the pickleball court.</li>
+  <li>Which Provo Recreation Center pools will be available Tuesday.</li>
+  <li>Whether Splash Summit allows same-day re-entry after leaving for lunch.</li>
+  <li>Saturday evening's location for Madeline's baby blessing.</li>
  </ul>
 </section>
 
+<footer class="sources"></footer>
 </main>
 <script src="config.js"></script>
 </body></html>
