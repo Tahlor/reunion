@@ -667,7 +667,7 @@ footer.sources a:hover { color: var(--forest); }
 }
 </style>
 </head>
-<body><main>
+<body><main id="top">
 <header class="hero">
   <div class="hero-eyebrow">Family reunion · camping week</div>
   <h1>Hazard Family Reunion</h1>
@@ -692,6 +692,7 @@ footer.sources a:hover { color: var(--forest); }
   <a class="secondary" href="#fri" id="nav-fri">Friday</a>
   <a class="secondary" href="#sat2" id="nav-sat2">Sat. Aug. 8</a>
   <a class="secondary" href="#confirm" id="nav-confirm">Still to confirm</a>
+  <a class="secondary" href="#top" id="nav-top">Top</a>
 </nav>
 
 <div class="meal-guide" aria-label="Meal guide">
@@ -803,4 +804,40 @@ footer.sources a:hover { color: var(--forest); }
 <footer class="sources"></footer>
 </main>
 <script src="config.js"></script>
+<script>
+(() => {
+  const targets = {
+    Sunday: '#sun',
+    Monday: '#mon',
+    Tuesday: '#tue',
+    Wednesday: '#wed',
+    Thursday: '#thu',
+    Friday: '#fri',
+    Saturday: '#sat1'
+  };
+  const now = new Date();
+  const weekday = new Intl.DateTimeFormat('en-US', {weekday: 'long'}).format(now);
+  const hasExplicitDestination = Boolean(window.location.hash) || window.location.href.endsWith('#');
+  const isEditorPreview = new URLSearchParams(window.location.search).has('edit-preview');
+
+  if (hasExplicitDestination || isEditorPreview) return;
+
+  let targetId = targets[weekday];
+  if (weekday === 'Saturday' && now.getFullYear() === 2026 && now.getMonth() === 7 && now.getDate() >= 8) {
+    targetId = '#sat2';
+  }
+
+  const target = document.querySelector(targetId);
+  if (target) {
+    window.requestAnimationFrame(() => {
+      const root = document.documentElement;
+      const previousScrollBehavior = root.style.scrollBehavior;
+      root.style.scrollBehavior = 'auto';
+      target.scrollIntoView({behavior: 'auto', block: 'start'});
+      if (previousScrollBehavior) root.style.scrollBehavior = previousScrollBehavior;
+      else root.style.removeProperty('scroll-behavior');
+    });
+  }
+})();
+</script>
 </body></html>
